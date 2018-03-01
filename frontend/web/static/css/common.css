@@ -1,0 +1,26 @@
+@charset "UTF-8";
+/**
+ * 通用样式文件
+ * @authors Amos (735767227@qq.com)
+ * @date    2017-03-15 12:53:35
+ * @version $Id$
+ */
+html,body,div,span,em,i,p,ul,li,form,input,textarea,img{margin: 0;padding: 0;}
+body{font: 12px/20px Arial, Verdana, 微软雅黑, "Lucida Grande", "Lucida Sans Unicode", Helvetica, sans-serif;background-color: #f7f7f7;}
+a{text-decoration: none;}
+li{list-style: none;}
+em, i{font-style: normal;}
+input,a{outline: none;-webkit-tap-highlight-color:rgba(255,255,255,0);}
+a{color: #2b2b2b;}
+.none{display: none;}
+
+::selection{color: #fff;background-color: #f54343;}
+header{height: 40px;display: -webkit-box;overflow: hidden;background-color: #fff;}
+header .logo{width: 120px;height: 100%;background-color: rgba(13, 165, 228, 0.8);}
+header .logo img{width: 100%;height: 40px;}
+header .search{-webkit-box-flex: 1;height: 100%;}
+header .search input{width: 90%;height: 30px;border-radius: 10px;border: 1px solid #ddd;box-sizing: border-box;padding-left: 10px;margin: 5px 0 0 5%;}
+footer{position: fixed;bottom: 0;width: 100%;background-color: #fff;}
+footer .menu{float: left;height: 50px;width: 20%;text-align: center;}
+footer .menu i{display: block;font-size: 20px;margin-top: 7px;}
+footer .menu.active a{color: #09c;}

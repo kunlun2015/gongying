@@ -1,0 +1,11 @@
+@charset "UTF-8";
+/**
+ * 管理员后台样式
+ * @authors Amos (735767227@qq.com)
+ * @date    2017-03-27 16:46:30
+ * @version $Id$
+ */
+.login-form .form-title{text-align: center;}
+.table-opt-td a{display: inline-block;margin: 0 5px;}
+a.my-btn-group{color: #666;}
+a.my-btn-group:hover{color: #fff;text-decoration: none;}
