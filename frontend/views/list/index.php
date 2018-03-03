@@ -1,15 +1,12 @@
 <?php
 /**
- * 网站首页
- * @authors Amos (szhcool1129@sina.com)
- * @date    2018-02-06 14:24:48
+ * 产品列表页
+ * @authors Amos (735767227@qq.com)
+ * @date    2018-03-03 10:14:02
  * @version $Id$
  */
-    $this->title = '首页';
+    $this->title = '列表页';
     use yii\helpers\Url;
-    \frontend\assets\AppAsset::addCss($this, 'libs/swiper/css/swiper.min.css');
-    \frontend\assets\AppAsset::addScript($this, 'libs/swiper/js/swiper.jquery.min.js');
-    \frontend\assets\AppAsset::addScript($this, 'js/index.js');
 ?>
 <header>
     <div class="logo">
@@ -19,25 +16,9 @@
         <input type="search" placeholder="搜索采购、供应">
     </div>
 </header>
-<div class="slide-wrap">
-    <div class="swiper-wrapper">
-        <div class="swiper-slide">
-            <a href="">
-                <img src="http://local.gongying.com/static/images/banner-1.jpg" alt="城市合伙人">
-            </a>
-        </div>
-        <div class="swiper-slide">
-            <a href="">
-                <img src="http://local.gongying.com/static/images/banner-2.jpg" alt="老年点读笔">
-            </a>
-        </div>
-    </div>
-    <div class="swiper-pagination"></div>
-</div>
 <div class="cate-change-select">
     <span class="active">最新订单</span>
     <span>最新供应</span>
-    <a href="<?=Url::to(['/list'])?>">查看更多</a>
 </div>
 <ul class="list purchase">
     <li>
@@ -211,7 +192,4 @@
         </div>            
     </li>
 </ul>
-<div class="btn-publish">
-    <a href="<?=Url::to(['/publish'])?>"><i class="fa fa-pencil-square-o"></i>发布</a>
-</div>
 <?=$this->render('/layouts/footerMenu');?>
