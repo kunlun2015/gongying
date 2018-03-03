@@ -1,9 +1,9 @@
 <?php
 /**
- * 求购
- * @authors Amos (735767227@qq.com)
- * @date    2018-03-03 11:34:54
- * @version $Id$
+ * 消息
+ * @authors Amos (szhcool1129@sina.com)
+ * @date    2018-03-03 22:00:11
+ * @version 1.0
  */
 
 namespace frontend\controllers;
@@ -11,8 +11,8 @@ namespace frontend\controllers;
 use Yii;
 use yii\web\Controller;
 
-class PurchaseController extends AppController {
-    
+class MessageController extends AppController {
+
     public function actionIndex()
     {
         return $this->render('index');
