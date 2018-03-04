@@ -17,4 +17,9 @@ class MyController extends AppController {
     {
         return $this->render('index');
     }
+
+    public function actionProfile()
+    {
+        return $this->render('profile');
+    }
 }

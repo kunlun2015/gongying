@@ -14,10 +14,13 @@ class AppAsset extends AssetBundle{
     public $css = [
         'css/common.css',
         'css/style.css',
-        'libs/font-awesome/css/font-awesome.min.css'
+        'libs/font-awesome/css/font-awesome.min.css',
+        'https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css',
+        'libs/weui/css/jquery-weui.min.css'
     ];
     public $js = [
-        'libs/jquery/jquery-3.1.0.min.js',
+        'libs/jquery/jquery-3.1.0.min.js',        
+        'libs/weui/js/jquery-weui.min.js',
         'js/common.js'
     ];
 

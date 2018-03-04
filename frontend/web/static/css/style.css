@@ -36,16 +36,12 @@
 .type-select{width: 100%;padding: 0 2%;box-sizing: border-box;}
 .type-select li{background-color: #fff;min-height: 180px;margin-top: 10px;border-radius: 5px;background-color: #f7f4e3;padding-bottom: 10px;}
 .type-select li:last-child{background-color: #e4f0f2;}
-.type-select li .text{padding: 20px 20px;height: 80px;}
+.type-select li .text{padding: 20px 20px;height: 80px;font-size: 14px;}
 .type-select li p{line-height: 25px;}
 .type-select li a{display: block;width: 90%;line-height: 40px;text-align: center;margin: 10px auto 0 auto;background-color: #0099CC;color: #fff;}
 
-.publish-form{padding: 10px 2%;}
-.publish-form input[type=text],.publish-form input[type=number]{height: 25px;padding-left: 5px;width: 60%;}
-.input-item{margin: 10px 0;}
-.input-item .item{display: inline-block;width: 60px;}
-.input-item textarea{width: 60%;height: 80px;vertical-align: text-top;resize: none;padding: 5px;outline: none;}
-.btn-upload{display: inline-block;width: 50px;height: 50px;line-height: 50px !important;text-align: center;font-size: 30px !important;border: 1px solid #ccc;cursor: pointer;box-sizing: border-box;}
-.publish-form .pictures{float: left;}
-.publish-form .pictures img{width: 50px;height: 50px;margin-right: 5px;}
-.publish-form .btn-submit{width: 100%;height: 40px;background-color: #09c;color: #fff;border: none;margin-top: 10px;}
+.publish-form .save-btn{margin: 30px 0;}
+.message-list{margin: 0 0 60px 0;}
+
+.avatar{width: 80px;height: 80px;margin: 20px auto;border-radius: 80px;overflow: hidden;}
+.avatar img{width: 80px;}
