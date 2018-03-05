@@ -5,7 +5,7 @@ return [
     'timeZone'=>'Asia/Chongqing',
     'components' => [
         'cache' => [
-            'class' => 'yii\caching\FileCache',
+            'class' => 'yii\redis\Cache',
         ],
         'db' => [
             'class' => 'yii\db\Connection',
@@ -15,15 +15,12 @@ return [
             'charset' => 'utf8',
             'tablePrefix' => 'kl_'
         ],
-        /*'cache' => [
-            'class' => 'yii\caching\MemCache',
-            'servers' => [
-                [
-                    'host' => '127.0.0.1',
-                    'port' => 11211
-                ]
-            ]
-        ],*/
+        'redis' => [
+                'class' => 'yii\redis\Connection',
+                'hostname' => '192.168.5.186',
+                'port' => 6379,
+                'database' => 0
+        ],
         'i18n' => [ 
             'translations' => [ 
                 'app' => [ 
