@@ -4,7 +4,7 @@ return [
     'supportEmail' => 'support@example.com',
     'fileSavePath' => dirname(dirname(__DIR__)).'/upload/',
     'uploadSaveDirs' => array('avatar', 'banner', 'posts'),
-    'imgUrl' => 'http://localhost/amos/kunlunSystem/upload/',
+    'imgUrl' => 'http://localhost/gongying/upload/',
     'logRootPath' => dirname(dirname(__DIR__)).'/log/',
     'cateMap' => [
         1 => 'php',

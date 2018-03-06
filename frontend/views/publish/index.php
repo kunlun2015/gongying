@@ -56,7 +56,7 @@
         <div class="weui-cell">
             <div class="weui-cell__bd">
                 <textarea class="weui-textarea description" name="description" placeholder="请输入说明信息" rows="3"></textarea>
-                <div class="weui-textarea-counter description-counter"><span>0</span>/10</div>
+                <div class="weui-textarea-counter description-counter"><span>0</span>/255</div>
             </div>
         </div>
     </div>
@@ -66,14 +66,10 @@
                 <div class="weui-uploader">
                     <div class="weui-uploader__hd">
                         <p class="weui-uploader__title">图片上传</p>
-                        <div class="weui-uploader__info">0/2</div>
+                        <div class="weui-uploader__info">0/8</div>
                     </div>
                     <div class="weui-uploader__bd">
-                        <ul class="weui-uploader__files" id="uploaderFiles">
-                            <li class="weui-uploader__file" style="background-image:url(./static/images/pic_160.png)"></li>
-                            <li class="weui-uploader__file" style="background-image:url(./static/images/pic_160.png)"></li>
-                            <li class="weui-uploader__file" style="background-image:url(./static/images/pic_160.png)"></li>                           
-                        </ul>
+                        <ul class="weui-uploader__files" id="uploaderFiles"></ul>
                         <div class="weui-uploader__input-box">
                             <input id="uploaderInput" name="uploaderInput" class="weui-uploader__input" type="button" accept="image/*" multiple="">
                         </div>
