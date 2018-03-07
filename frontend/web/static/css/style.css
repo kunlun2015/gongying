@@ -45,3 +45,12 @@
 
 .avatar{width: 80px;height: 80px;margin: 20px auto;border-radius: 80px;overflow: hidden;}
 .avatar img{width: 80px;}
+
+.classify{display: -webkit-box;}
+.classify-main{width: 80px;background-color: #f7f7f7;}
+.classify-main li{text-align: center;font-size: 14px;line-height: 35px;cursor: pointer;}
+.classify-main li.active{background-color: #fff;}
+.classify-display{-webkit-box-flex: 1;padding: 10px;}
+.classify-display dl{overflow: hidden;}
+.classify-display dt{padding: 2px 5px;font-size: 16px;}
+.classify-display dd{float: left;padding: 2px 5px;font-size: 14px;}

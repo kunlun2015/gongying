@@ -34,16 +34,13 @@
 </header>
 <div class="slide-wrap">
     <div class="swiper-wrapper">
+        <?php foreach ($bannerList as $k => $v) {?>
         <div class="swiper-slide">
-            <a href="">
-                <img src="http://local.gongying.com/static/images/banner-1.jpg" alt="城市合伙人">
+            <a href="<?=$v['href']?>">
+                <img src="<?=Yii::$app->params['imgUrl'].$v['picture']?>" alt="<?=$v['title']?>">
             </a>
         </div>
-        <div class="swiper-slide">
-            <a href="">
-                <img src="http://local.gongying.com/static/images/banner-2.jpg" alt="老年点读笔">
-            </a>
-        </div>
+        <?php } ?>
     </div>
     <div class="swiper-pagination"></div>
 </div>

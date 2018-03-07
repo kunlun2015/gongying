@@ -8,7 +8,91 @@ $(document).ready(function(){
     $("#city-picker").cityPicker({
         title: "请选择收货地址"
     });
-    $("#datetime-picker").datetimePicker();
+    $("#datetime-picker").datetimePicker({
+        times: function () {
+          return [];
+        }
+    });
+    $("input[name=classify]").click(function(){        
+        $("input[name=classify-1]").select('open');
+    })
+    //所属分类1
+    var classify1 = [];
+    var classify2 = [];
+    var classify3 = [];
+    for(var i in classify){
+        if(classify[i]['pid'] == 0){
+            classify1.push({value: classify[i]['id'], title: classify[i]['name']});
+        }
+    }
+    $("input[name=classify-1]").select({
+        title: "选择职业",
+        items: classify1,
+        onChange: function(e){
+            classify2 = [];
+            for(var i in classify){
+                for(var ii in classify[i].sub){
+                    if(classify[i].sub[ii].pid == e.values){
+                        classify2.push({value: classify[i].sub[ii].id, title: classify[i].sub[ii].name});
+                    }
+                }
+            }
+            $("input[name=classify-2]").select('update', {
+                items: classify2
+            });
+        },
+        beforeClose: function(e){
+            if(e === undefined){
+                $.alert("请选择所属分类");
+                return false;
+            }
+        },
+        onClose: function(){
+            $("input[name=classify-2]").select('open');
+        }
+    });
+
+    $("input[name=classify-2]").select({
+        title: "选择职业",
+        items: classify2,
+        onChange: function(e){
+            classify3 = [];
+            for(var i in classify){
+                for(var ii in classify[i].sub){
+                    for(var iii in classify[i].sub[ii].sub){
+                        if(classify[i].sub[ii].sub[iii].pid == e.values){
+                            classify3.push({value: classify[i].sub[ii].sub[iii].id, title: classify[i].sub[ii].sub[iii].name});
+                        }
+                    }
+                }
+            }
+            console.log(classify3)
+            $("input[name=classify-3]").select('update', {
+                items: classify3
+            });
+        },
+        beforeClose: function(e){
+            if(e === undefined){
+                $.alert("请选择所属分类");
+                return false;
+            }
+        },
+        onClose: function(){
+            $("input[name=classify-3]").select('open');
+        }
+    });
+
+    $("input[name=classify-3]").select({
+        title: "选择职业",
+        items: classify3,
+        beforeClose: function(e){
+            if(e === undefined){
+                $.alert("请选择所属分类");
+                return false;
+            }
+            $("input[name=classify]").val($("input[name=classify-1]").val()+'>'+$("input[name=classify-2]").val()+'>'+$("input[name=classify-3]").val());
+        }
+    });
 
     $('.description').on('input', function(){
         var counter = $('.description-counter')[0].innerText;
@@ -25,17 +109,17 @@ $(document).ready(function(){
 
     var uploadNum = $('.weui-uploader__info').text().split('/')[1];
     var config = {
-        enabled: true, /** 是否启用文件选择，默认是true */
+        enabled: true,
         customered: true,
-        multipleFiles: true, /** 是否允许同时选择多个文件，默认是false */   
-        autoRemoveCompleted: false, /** 是否自动移除已经上传完毕的文件，非自定义UI有效(customered:false)，默认是false */
-        autoUploading: true, /** 当选择完文件是否自动上传，默认是true */
-        fileFieldName: "uploaderInput", /** 相当于指定<input type="file" name="FileData">，默认是FileData */
-        maxSize: 1024*1024*10, /** 当_t.bStreaming = false 时（也就是Flash上传时），2G就是最大的文件上传大小！所以一般需要 */
-        simLimit: uploadNum, /** 允许同时选择文件上传的个数（包含已经上传过的） */
-        extFilters: [".jpg", ".png", ".jpeg"], /** 默认是全部允许，即 [] */
-        browseFileId : "uploaderInput", /** 文件选择的Dom Id，如果不指定，默认是i_select_files */
-        filesQueueId : "i_stream_files_queue", /** 文件上传进度显示框ID，非自定义UI有效(customered:false) */
+        multipleFiles: true,
+        autoRemoveCompleted: false,
+        autoUploading: true,
+        fileFieldName: "uploaderInput",
+        maxSize: 1024*1024*10,
+        simLimit: uploadNum,
+        extFilters: [".jpg", ".png", ".jpeg"],
+        browseFileId : "uploaderInput",
+        filesQueueId : "i_stream_files_queue",
         uploadURL : "/upload/picture",
         tokenURL: '/upload/token',
         retryCount: 1,
@@ -47,7 +131,7 @@ $(document).ready(function(){
             console.log('文件类型不匹配');
         },
         onAddTask: function(file) {
-            var str = '<li class="weui-uploader__file weui-uploader__file_status" style="background-image:url(./static/images/pic_160.png)"><div class="weui-uploader__file-content">50%</div></li>';
+            var str = '<li class="weui-uploader__file weui-uploader__file_status" style="background-image:url(./static/images/pic_160.png)"><div class="weui-uploader__file-content">50%</div><input type="hidden" name="pictures[]" /></li>';
             $('#uploaderFiles').append(str);  
         },
         onUploadProgress: function(file) {
@@ -59,6 +143,7 @@ $(document).ready(function(){
         onComplete: function(file) {
             $('.weui-uploader__file_status .weui-uploader__file-content').text("100%");
             $('.weui-uploader__file_status').css({'background-image': 'url("'+JSON.parse(file.msg).url+'")'})
+             $('.weui-uploader__file_status input').val(JSON.parse(file.msg).path);
             $('.weui-uploader__file_status').removeClass('weui-uploader__file_status');
             $('.weui-uploader__info').text($('.weui-uploader__file').length+'/'+uploadNum);
         },
@@ -75,7 +160,21 @@ $(document).ready(function(){
 
     //保存表单
     $('.save-btn').click(function(){
+        if(!$("input[name=title]").val()){
+            $.alert("请输入采购物资名称", function(){
+                $("input[name=title]").focus()
+            });
+            return false;
+        }
+        tools.ajax({
+            url: '',
+            dataType: 'json',
+            type: 'post',
+            data: $('.publish-form form').serialize(),
+            success: function(res){
 
+            }
+        })
     })
 
 

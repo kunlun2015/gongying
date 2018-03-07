@@ -9,12 +9,14 @@ namespace frontend\controllers;
 
 use Yii;
 use yii\web\Controller;
+use frontend\models\Banner;
 
 class SiteController extends AppController {
     
     public function actionIndex()
     {
-        return $this->render('index');
+        $data['bannerList'] = (new Banner)->bannerList();
+        return $this->render('index', $data);
     }
 
     public function actionTest()

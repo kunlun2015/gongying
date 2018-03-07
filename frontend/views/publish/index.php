@@ -7,12 +7,12 @@
  */
     $this->title = '发布页面';
     use yii\helpers\Url;
-    \frontend\assets\AppAsset::addScript($this, 'libs/weui/js/city-picker.min.js');
-    \frontend\assets\AppAsset::addScript($this, 'js/publish.js');
-    \frontend\assets\AppAsset::addCss($this, 'libs/stream/css/stream-v1.css');
+    \frontend\assets\AppAsset::addScript($this, 'libs/weui/js/city-picker.min.js');    
     \frontend\assets\AppAsset::addScript($this, 'libs/stream/js/stream-v1.js');
+    \frontend\assets\AppAsset::addScript($this, 'js/publish.js');
 ?>
 <div class="publish-form">
+    <form action="">
     <div class="weui-cells weui-cells_form">
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">采购物资</label></div>
@@ -24,6 +24,15 @@
             <div class="weui-cell__hd"><label class="weui-label">数量</label></div>
             <div class="weui-cell__bd">
                 <input class="weui-input" name="num" type="number" pattern="[0-9]*" placeholder="请输入数量">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">所属分类</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" name="classify" type="text" readonly="readonly" placeholder="请选择所属分类">
+                <input class="weui-input none" name="classify-1" type="text" placeholder="请选择所属分类">
+                <input class="weui-input none" name="classify-2" type="text" placeholder="请选择所属分类">
+                <input class="weui-input none" name="classify-3" type="text" placeholder="请选择所属分类">
             </div>
         </div>
         <div class="weui-cell">
@@ -87,4 +96,8 @@
         </div>
     </div>
     <a href="javascript:;" class="weui-btn weui-btn_primary save-btn">保存</a>
+    </form>
 </div>
+<script>
+    var classify = <?=json_encode($classify)?>;
+</script>

@@ -10,11 +10,14 @@ namespace frontend\controllers;
 
 use Yii;
 use yii\web\Controller;
+use frontend\models\Classify;
 
 class ClassifyController extends AppController {
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $classify = new Classify;
+        $data['list'] = $classify->classifyList();
+        return $this->render('index', $data);
     }
 }

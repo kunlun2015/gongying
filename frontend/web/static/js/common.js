@@ -17,3 +17,15 @@ $(document).ready(function(){
         return false;
     })
 })
+var tools = {
+    ajax: function(params){
+        $.ajax({
+            url: params.url,
+            type: params.type,
+            dataType: params.dataType,
+            data: params.data,
+            success: params.success,
+            error: params.error ? params.error : function(){}
+        })
+    }
+}
