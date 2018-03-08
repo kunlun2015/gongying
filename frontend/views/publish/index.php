@@ -15,17 +15,19 @@
     <form action="">
     <div class="weui-cells weui-cells_form">
         <div class="weui-cell">
-            <div class="weui-cell__hd"><label class="weui-label">采购物资</label></div>
+            <div class="weui-cell__hd"><label class="weui-label"><?= $type === 1 ? '采购': '供应' ?>物资</label></div>
             <div class="weui-cell__bd">
                 <input class="weui-input" name="title" type="text" placeholder="请输入物资名称">
             </div>
         </div>
+        <?php if($type === 1){ ?>
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">数量</label></div>
             <div class="weui-cell__bd">
                 <input class="weui-input" name="num" type="number" pattern="[0-9]*" placeholder="请输入数量">
             </div>
         </div>
+        <?php } ?>
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">所属分类</label></div>
             <div class="weui-cell__bd">
@@ -33,14 +35,18 @@
                 <input class="weui-input none" name="classify-1" type="text" placeholder="请选择所属分类">
                 <input class="weui-input none" name="classify-2" type="text" placeholder="请选择所属分类">
                 <input class="weui-input none" name="classify-3" type="text" placeholder="请选择所属分类">
+                <input type="hidden" name="fid">
+                <input type="hidden" name="sid">
+                <input type="hidden" name="tid">
             </div>
         </div>
+        <?php if($type === 1){ ?>
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">预算金额</label></div>
             <div class="weui-cell__bd">
                 <input class="weui-input" name="budget" type="number" pattern="[0-9]*" placeholder="您的预算金额">
             </div>
-        </div>
+        </div>        
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">交付周期</label></div>
             <div class="weui-cell__bd">
@@ -53,8 +59,9 @@
                 <input class="weui-input" name="deadline" id="datetime-picker" type="text" placeholder="截至日期">
             </div>
         </div>
+        <?php } ?>
         <div class="weui-cell">
-            <div class="weui-cell__hd"><label class="weui-label">交付地区</label></div>
+            <div class="weui-cell__hd"><label class="weui-label"><?= $type === 1 ? '交付': '所在' ?>地区</label></div>
             <div class="weui-cell__bd">
                 <input class="weui-input" name="delivery_area" type="text" id='city-picker' placeholder="选择交付地区"/>
             </div>
@@ -95,6 +102,7 @@
             </div>
         </div>
     </div>
+    <input type="hidden" name="type" value="<?=$type?>">
     <a href="javascript:;" class="weui-btn weui-btn_primary save-btn">保存</a>
     </form>
 </div>

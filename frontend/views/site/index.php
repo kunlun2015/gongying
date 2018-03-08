@@ -49,177 +49,55 @@
     <span>最新供应</span>
     <a href="<?=Url::to(['/list'])?>">查看更多</a>
 </div>
-<ul class="list purchase">
+<ul class="list mb-55 purchase">
+    <?php foreach ($purchaseList as $k => $v) {?>
     <li>
         <div class="list-t">
             <div class="thumb">
-                <img src="http://local.gongying.com/static/images/banner-1.jpg" alt="">
+                <img src="<?=Yii::$app->params['imgUrl'].$v['pictures'][0]?>.thumb.jpg" alt="<?=$v['title']?>">
             </div>            
             <div class="list-info">
                 <span class="price">议价</span>
-                <p class="title">请购此款散热器1</p>
-                <p class="num">数量：100000</p>
-                <p class="area">交付地区：广东省深圳市宝安区</p>
+                <p class="title"><?=$v['title']?></p>
+                <p class="num">数量：<?=$v['num']?></p>
+                <p class="area">交付地区：<?=$v['delivery_area']?></p>
             </div>
         </div>
         <div class="attr">
             <div class="cate">
-                <span>一级分类</span>
-                <span>二级分类</span>
-                <span>三级分类</span>
+                <span><?=$v['fname']?></span>
+                <span><?=$v['sname']?></span>
+                <span><?=$v['tname']?></span>
             </div>
-            <div class="keywords">#散热器#</div>
+            <div class="keywords"><a href="">#<?=$v['fname']?>#</a></div>
         </div>            
     </li>
-    <li>
-        <div class="list-t">
-            <div class="thumb">
-                <img src="http://local.gongying.com/static/images/banner-1.jpg" alt="">
-            </div>            
-            <div class="list-info">
-                <span class="price">议价</span>
-                <p class="title">请购此款散热器</p>
-                <p class="num">数量：100000</p>
-                <p class="area">交付地区：广东省深圳市宝安区</p>
-            </div>
-        </div>
-        <div class="attr">
-            <div class="cate">
-                <span>一级分类</span>
-                <span>二级分类</span>
-                <span>三级分类</span>
-            </div>
-            <div class="keywords">#散热器#</div>
-        </div>            
-    </li>
-    <li>
-        <div class="list-t">
-            <div class="thumb">
-                <img src="http://local.gongying.com/static/images/banner-1.jpg" alt="">
-            </div>            
-            <div class="list-info">
-                <span class="price">议价</span>
-                <p class="title">请购此款散热器</p>
-                <p class="num">数量：100000</p>
-                <p class="area">交付地区：广东省深圳市宝安区</p>
-            </div>
-        </div>
-        <div class="attr">
-            <div class="cate">
-                <span>一级分类</span>
-                <span>二级分类</span>
-                <span>三级分类</span>
-            </div>
-            <div class="keywords">#散热器#</div>
-        </div>            
-    </li>
-    <li>
-        <div class="list-t">
-            <div class="thumb">
-                <img src="http://local.gongying.com/static/images/banner-1.jpg" alt="">
-            </div>            
-            <div class="list-info">
-                <span class="price">议价</span>
-                <p class="title">请购此款散热器</p>
-                <p class="num">数量：100000</p>
-                <p class="area">交付地区：广东省深圳市宝安区</p>
-            </div>
-        </div>
-        <div class="attr">
-            <div class="cate">
-                <span>一级分类</span>
-                <span>二级分类</span>
-                <span>三级分类</span>
-            </div>
-            <div class="keywords">#散热器#</div>
-        </div>            
-    </li>
+    <?php } ?>
 </ul>
-<ul class="list supply none">
+<ul class="list mb-55 supply none">
+    <?php foreach ($supplyList as $k => $v) {?>
     <li>
         <div class="list-t">
             <div class="thumb">
-                <img src="http://local.gongying.com/static/images/banner-1.jpg" alt="">
+                <img src="<?=Yii::$app->params['imgUrl'].$v['pictures'][0]?>" alt="">
             </div>            
             <div class="list-info">
                 <span class="price">议价</span>
-                <p class="title">请购此款散热器2</p>
-                <p class="num">数量：100000</p>
-                <p class="area">交付地区：广东省深圳市宝安区</p>
+                <p class="title"><?=$v['title']?></p>
+                <p class="num">服务商：<?=$v['num']?></p>
+                <p class="area">所在地区：<?=$v['delivery_area']?></p>
             </div>
         </div>
         <div class="attr">
             <div class="cate">
-                <span>一级分类</span>
-                <span>二级分类</span>
-                <span>三级分类</span>
+                <span><?=$v['fname']?></span>
+                <span><?=$v['sname']?></span>
+                <span><?=$v['tname']?></span>
             </div>
-            <div class="keywords">#散热器#</div>
+            <div class="keywords"><a href="">#<?=$v['fname']?>#</a></div>
         </div>            
     </li>
-    <li>
-        <div class="list-t">
-            <div class="thumb">
-                <img src="http://local.gongying.com/static/images/banner-1.jpg" alt="">
-            </div>            
-            <div class="list-info">
-                <span class="price">议价</span>
-                <p class="title">请购此款散热器</p>
-                <p class="num">数量：100000</p>
-                <p class="area">交付地区：广东省深圳市宝安区</p>
-            </div>
-        </div>
-        <div class="attr">
-            <div class="cate">
-                <span>一级分类</span>
-                <span>二级分类</span>
-                <span>三级分类</span>
-            </div>
-            <div class="keywords">#散热器#</div>
-        </div>            
-    </li>
-    <li>
-        <div class="list-t">
-            <div class="thumb">
-                <img src="http://local.gongying.com/static/images/banner-1.jpg" alt="">
-            </div>            
-            <div class="list-info">
-                <span class="price">议价</span>
-                <p class="title">请购此款散热器</p>
-                <p class="num">数量：100000</p>
-                <p class="area">交付地区：广东省深圳市宝安区</p>
-            </div>
-        </div>
-        <div class="attr">
-            <div class="cate">
-                <span>一级分类</span>
-                <span>二级分类</span>
-                <span>三级分类</span>
-            </div>
-            <div class="keywords">#散热器#</div>
-        </div>            
-    </li>
-    <li>
-        <div class="list-t">
-            <div class="thumb">
-                <img src="http://local.gongying.com/static/images/banner-1.jpg" alt="">
-            </div>            
-            <div class="list-info">
-                <span class="price">议价</span>
-                <p class="title">请购此款散热器</p>
-                <p class="num">数量：100000</p>
-                <p class="area">交付地区：广东省深圳市宝安区</p>
-            </div>
-        </div>
-        <div class="attr">
-            <div class="cate">
-                <span>一级分类</span>
-                <span>二级分类</span>
-                <span>三级分类</span>
-            </div>
-            <div class="keywords">#散热器#</div>
-        </div>            
-    </li>
+    <?php } ?>
 </ul>
 <div class="btn-publish">
     <a href="<?=Url::to(['/publish'])?>"><i class="fa fa-pencil-square-o"></i>发布</a>

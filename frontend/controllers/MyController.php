@@ -13,13 +13,23 @@ use yii\web\Controller;
 
 class MyController extends AppController {
 
+    private $user;
+
+    public function init()
+    {
+        parent::init();
+        $this->user = $this->session->get('user');
+    }
+
     public function actionIndex()
     {
-        return $this->render('index');
+        $data['user'] = $this->user;
+        return $this->render('index', $data);
     }
 
     public function actionProfile()
     {
-        return $this->render('profile');
+        $data['user'] = $this->user;
+        return $this->render('profile', $data);
     }
 }

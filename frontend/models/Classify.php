@@ -37,4 +37,14 @@ class Classify extends CommonModel
     {
         return $this->db->createCommand('select id, pid, name from {{%category}} where pid = :pid order by sort desc', ['pid' => $pid])->queryAll();
     }
+
+    /**
+     * 获取类别信息
+     * @param  int $id 类别id
+     * @return array
+     */
+    public function classifyById($id)
+    {
+        return $this->db->createCommand('select id, pid, name from {{%category}} where id = :id', ['id' => $id])->queryOne();
+    }
 }

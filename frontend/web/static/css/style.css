@@ -5,17 +5,21 @@
  * @date    2018-02-06 15:05:50
  * @version $Id$
  */
+
+.mb-55{margin-bottom: 55px !important;}
+
 .slide-wrap{position: relative;overflow: hidden;}
 .swiper-slide img{width: 100%;}
 .cate-change-select{padding: 0 2%;background-color: #fff;margin-bottom: 1px;line-height: 30px;}
 .cate-change-select span{display: inline-block;font-size: 14px;}
 .cate-change-select span:after{content: ' |';color: #000;}
 .cate-change-select span:last-of-type:after{content: ''}
-.cate-change-select a{float: right;}
+.cate-change-select a{float: right;font-size: 14px;}
 .cate-change-select .active{color: red;}
 
-.list{margin-bottom: 55px;}
+.list{}
 .list .thumb{width: 80px;height: 80px;overflow: hidden;}
+.list .thumb img{width: 100%;}
 .list li{position: relative;background-color: #fff;padding: 10px 2% 0 2%;margin: 0 0 8px 0;}
 .list .list-t{display: -webkit-box;height: 80px;}
 .list .list-info{-webkit-box-flex: 1;margin: 0 0 0 10px;}
@@ -23,7 +27,7 @@
 .list-info .num,.list-info .area{font-size: 14px;color: #bbb;line-height: 26px;}
 .list-info .area{border-bottom: 1px solid #f7f7f7;}
 .list-info .price{position: absolute;right: 2%;font-size: 14px;color: red;}
-.list .attr{height: 30px;line-height: 30px;}
+.list .attr{height: 30px;line-height: 30px;font-size: 14px;}
 .list .cate{float: left;}
 .list .cate span{display: inline-block;color: #bbb;}
 .list .cate span:after{content: '>';padding: 0 0 0 3px;}
@@ -54,3 +58,5 @@
 .classify-display dl{overflow: hidden;}
 .classify-display dt{padding: 2px 5px;font-size: 16px;}
 .classify-display dd{float: left;padding: 2px 5px;font-size: 14px;}
+
+.weui-loadmore{margin: 0 auto 50px auto;}

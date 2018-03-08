@@ -46,6 +46,7 @@ $(document).ready(function(){
                 $.alert("请选择所属分类");
                 return false;
             }
+            $('input[name="fid"]').val(e);
         },
         onClose: function(){
             $("input[name=classify-2]").select('open');
@@ -66,7 +67,6 @@ $(document).ready(function(){
                     }
                 }
             }
-            console.log(classify3)
             $("input[name=classify-3]").select('update', {
                 items: classify3
             });
@@ -76,6 +76,7 @@ $(document).ready(function(){
                 $.alert("请选择所属分类");
                 return false;
             }
+            $('input[name="sid"]').val(e);
         },
         onClose: function(){
             $("input[name=classify-3]").select('open');
@@ -91,6 +92,7 @@ $(document).ready(function(){
                 return false;
             }
             $("input[name=classify]").val($("input[name=classify-1]").val()+'>'+$("input[name=classify-2]").val()+'>'+$("input[name=classify-3]").val());
+            $('input[name="tid"]').val(e);
         }
     });
 
@@ -131,7 +133,7 @@ $(document).ready(function(){
             console.log('文件类型不匹配');
         },
         onAddTask: function(file) {
-            var str = '<li class="weui-uploader__file weui-uploader__file_status" style="background-image:url(./static/images/pic_160.png)"><div class="weui-uploader__file-content">50%</div><input type="hidden" name="pictures[]" /></li>';
+            var str = '<li class="weui-uploader__file weui-uploader__file_status" style="background-image:url(./static/images/pic_160.png)"><div class="weui-uploader__file-content">0%</div><input type="hidden" name="pictures[]" /></li>';
             $('#uploaderFiles').append(str);  
         },
         onUploadProgress: function(file) {
@@ -167,15 +169,17 @@ $(document).ready(function(){
             return false;
         }
         tools.ajax({
-            url: '',
+            url: '/publish/save',
             dataType: 'json',
             type: 'post',
             data: $('.publish-form form').serialize(),
             success: function(res){
-
+                if(res.code === 0){
+                    $.toast(res.msg, 1000, function(){
+                        window.location.href = res.data.url
+                    });
+                }
             }
         })
     })
-
-
 })

@@ -16,11 +16,13 @@ class AppController extends Controller {
     protected $app;
     protected $request;
     protected $log;
+    protected $session;
 
     public function init(){
         $this->app = Yii::$app;
         $this->app->language = 'zh_CN';
         $this->request = $this->app->request;
+        $this->session = $this->app->session;
         
     }
 
@@ -41,6 +43,13 @@ class AppController extends Controller {
     public function beforeAction($action)
     {
         $this->log = new Log;
+        
+        $this->session->set('user', [
+            'suid' => 1,
+            'username' => 'Amos',
+            'avatar' => $this->app->params['staticUrl'].'/images/avatar.jpg'
+        ]);
+
         return true;
     }
 

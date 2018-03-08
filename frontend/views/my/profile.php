@@ -9,7 +9,7 @@
     use yii\helpers\Url;
 ?>
 <div class="avatar">
-    <img src="../static/images/pic_160.png">
+    <img src="<?=$user['avatar']?>">
 </div>
 <div class="weui-cells">
     <a href="" class="weui-cell weui-cell_access">

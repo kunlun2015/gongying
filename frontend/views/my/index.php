@@ -11,10 +11,10 @@
 <div class="weui-cells">
     <a href="<?=Url::to(['/my/profile'])?>"  class="weui-cell weui-cell_access">
         <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-            <img src="./static/images/pic_160.png" style="width: 50px;display: block">
+            <img src="<?=$user['avatar']?>" style="width: 50px;display: block">
         </div>
         <div class="weui-cell__bd">
-            <p>Amos</p>
+            <p><?=$user['username']?></p>
         </div>
         <div class="weui-cell__ft"></div>
     </a>
