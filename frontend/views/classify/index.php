@@ -8,7 +8,10 @@
     $this->title = '分类';
     use yii\helpers\Url;
 ?>
-<style>body{background: #fff;}</style>
+<style>
+    body{background: #fff;}
+    html, body{height: 100%;}
+</style>
 <div class="classify">
     <ul class="classify-main">
         <?php foreach ($list as $k => $v) {?>
@@ -19,7 +22,7 @@
     <div class="classify-display <?php if($k != 0){ ?>none<?php } ?>" id="classify-<?=$v['id']?>">
         <?php foreach ($v['sub'] as $k2 => $v2) {?>
         <dl>
-            <dt><?=$v2['name']?></dt>
+            <dt><span></span><?=$v2['name']?></dt>
             <?php foreach ($v2['sub'] as $k3 => $v3) {?>
             <dd><?=$v3['name']?></dd>
             <?php } ?>     

@@ -26,7 +26,8 @@
 .list-info .title{font-size: 16px;line-height: 28px;}
 .list-info .num,.list-info .area{font-size: 14px;color: #bbb;line-height: 26px;}
 .list-info .area{border-bottom: 1px solid #f7f7f7;}
-.list-info .price{position: absolute;right: 2%;font-size: 14px;color: red;}
+.list-info .price{position: absolute;right: 2%;}
+.list-info .price a{font-size: 14px;color: red;}
 .list .attr{height: 30px;line-height: 30px;font-size: 14px;}
 .list .cate{float: left;}
 .list .cate span{display: inline-block;color: #bbb;}
@@ -34,8 +35,9 @@
 .list .cate span:last-child:after{content: '';}
 .list .keywords{float: right;}
 
-.btn-publish{position: fixed;bottom: 80px;right: 2%;width: 50px;height: 50px;border-radius: 50px;background-color: #ccc;text-align: center;opacity: .8;}
-.btn-publish i{display: block;font-size: 20px;margin-top: 5px;}
+.btn-publish{position: fixed;bottom: 80px;right: 2%;width: 50px;height: 50px;border-radius: 50px;background-color: #09c;text-align: center;opacity: .8;}
+.btn-publish i{display: block;font-size: 20px;margin-top: 5px;margin-bottom: -5px;color: #fff;}
+.btn-publish a{color: #fff;font-size: 14px;}
 
 .type-select{width: 100%;padding: 0 2%;box-sizing: border-box;}
 .type-select li{background-color: #fff;min-height: 180px;margin-top: 10px;border-radius: 5px;background-color: #f7f4e3;padding-bottom: 10px;}
@@ -50,13 +52,16 @@
 .avatar{width: 80px;height: 80px;margin: 20px auto;border-radius: 80px;overflow: hidden;}
 .avatar img{width: 80px;}
 
-.classify{display: -webkit-box;}
+.classify{display: -webkit-box;height: 100%;}
 .classify-main{width: 80px;background-color: #f7f7f7;}
 .classify-main li{text-align: center;font-size: 14px;line-height: 35px;cursor: pointer;}
 .classify-main li.active{background-color: #fff;}
 .classify-display{-webkit-box-flex: 1;padding: 10px;}
-.classify-display dl{overflow: hidden;}
+.classify-display dl{overflow: hidden;margin-top: 8px;}
+.classify-display dl:first-child{margin-top: 0;}
 .classify-display dt{padding: 2px 5px;font-size: 16px;}
+.classify-display dt span{display: inline-block;height: 16px;border-left: 3px solid #09c;margin-bottom: -2px;margin-right: 5px;}
 .classify-display dd{float: left;padding: 2px 5px;font-size: 14px;}
 
-.weui-loadmore{margin: 0 auto 50px auto;}
+.weui-loadmore{margin: 18px auto 43px auto !important;}
+.weui-loadmore .weui-loadmore__tips{background-color: #f7f7f7 !important;}

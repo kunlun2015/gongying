@@ -106,6 +106,14 @@
     <a href="javascript:;" class="weui-btn weui-btn_primary save-btn">保存</a>
     </form>
 </div>
+<div class="weui-gallery" id="gallery">
+    <span class="weui-gallery__img" id="galleryImg"></span>
+    <div class="weui-gallery__opr">
+        <a href="javascript:" class="weui-gallery__del">
+            <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+        </a>
+    </div>
+</div>
 <script>
     var classify = <?=json_encode($classify)?>;
 </script>

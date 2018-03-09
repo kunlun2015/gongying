@@ -17,7 +17,7 @@
             <form class="weui-search-bar__form">
                 <div class="weui-search-bar__box">
                     <i class="weui-icon-search"></i>
-                    <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required/>
+                    <input type="search" name="keywords" value="<?=$keywords?>" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required/>
                     <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
                 </div>
                 <label class="weui-search-bar__label" id="searchText">
@@ -54,7 +54,48 @@
     </li>
     <?php } ?>
 </ul>
-<div class="weui-loadmore weui-loadmore_line">
-  <span class="weui-loadmore__tips">暂无数据</span>
+<div class="weui-loadmore weui-loadmore_line" data-page="1" data-total="<?=$totalPage?>">
+  <span class="weui-loadmore__tips"><?php if($totalPage < 1){ ?>暂无数据<?php }else{ ?>上滑加载更多<?php } ?></span>
 </div>
+<?php $this->beginBlock("pageJs") ?>
+    $(document).ready(function(){
+        var loading = false;
+        $(document.body).infinite().on("infinite", function() {
+            var totalPage = $('.weui-loadmore').data('total');
+            var page = $('.weui-loadmore').data('page');
+            if(loading || page >= totalPage) return;
+            if(page < totalPage){
+                $('.weui-loadmore .weui-loadmore__tips').text('正在加载，请稍后...');
+            }
+            loading = true;
+            tools.ajax({
+                url: '/purchase/get-data',
+                dataType: 'json',
+                type: 'post',
+                data: {keywords: $('#searchInput').val(), page: page + 1},
+                success: function(res){
+                    if(res.code === 0){
+                        console.log(res.data)
+                        var html = '';
+                        $.each(res.data, function(index, value){
+                            html = '';
+                            html += '<li><div class="list-t"><div class="thumb"><img src="<?=Yii::$app->params['imgUrl']?>'+value.pictures[0]+'.thumb.jpg" alt="'+value.title+'"></div><div class="list-info"><span class="price">议价</span><p class="title">'+value.title+'</p><p class="num">数量：'+value.num+'</p><p class="area">交付地区：'+value.delivery_area+'</p></div></div><div class="attr"><div class="cate"><span>'+value.fname+'</span><span>'+value.sname+'</span><span>'+value.tname+'</span></div><div class="keywords"><a href="">#'+value.fname+'#</a></div></div></li>';
+                            $('.list').append(html);
+                        })
+                        $('.weui-loadmore').data('page', page + 1);
+                        if(page + 1 >= totalPage){
+                            $('.weui-loadmore .weui-loadmore__tips').text('已加载全部');
+                        }else{
+                            $('.weui-loadmore .weui-loadmore__tips').text('上滑加载更多');
+                        }
+                    }
+                },
+                complete: function(){
+                    loading = false;
+                }
+            })
+        });
+    })
+<?php $this->endBlock() ?>
+<?php $this->registerJs($this->blocks["pageJs"], \yii\web\View::POS_END); ?>
 <?=$this->render('/layouts/footerMenu');?>

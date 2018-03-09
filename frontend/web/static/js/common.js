@@ -14,6 +14,22 @@ $(document).ready(function(){
         $(this).addClass('active');
         $('.list').hide();
         $('.list').eq($(this).index()).show();
+        if($('.weui-loadmore').length === 2){
+            $('.weui-loadmore').addClass('none');
+            $('.weui-loadmore').eq($(this).index()).removeClass('none');
+        }
+        return false;
+    })
+
+    //分类切换
+    $('.classify-main li').click(function(){
+        if($(this).hasClass('active')){
+            return false;
+        }
+        $('.classify-main li').removeClass('active');
+        $(this).addClass('active');
+        $('.classify-display').hide();
+        $('#classify-'+$(this).data('id')).show();
         return false;
     })
 })
@@ -25,7 +41,8 @@ var tools = {
             dataType: params.dataType,
             data: params.data,
             success: params.success,
-            error: params.error ? params.error : function(){}
+            error: params.error ? params.error : function(){},
+            complete: params.complete ? params.complete : function(){}
         })
     }
 }

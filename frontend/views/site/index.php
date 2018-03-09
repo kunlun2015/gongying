@@ -17,10 +17,10 @@
     </div>
     <div class="search">
         <div class="weui-search-bar" id="searchBar">
-            <form class="weui-search-bar__form">
+            <form class="weui-search-bar__form" action="<?=Url::to(['/list'])?>">
                 <div class="weui-search-bar__box">
                     <i class="weui-icon-search"></i>
-                    <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required/>
+                    <input type="search" name="keywords" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required/>
                     <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
                 </div>
                 <label class="weui-search-bar__label" id="searchText">
@@ -57,7 +57,7 @@
                 <img src="<?=Yii::$app->params['imgUrl'].$v['pictures'][0]?>.thumb.jpg" alt="<?=$v['title']?>">
             </div>            
             <div class="list-info">
-                <span class="price">议价</span>
+                <span class="price"><a href="<?=Url::to(['/detail', 'id' => $v['id']])?>">议价</a></span>
                 <p class="title"><?=$v['title']?></p>
                 <p class="num">数量：<?=$v['num']?></p>
                 <p class="area">交付地区：<?=$v['delivery_area']?></p>
@@ -82,7 +82,7 @@
                 <img src="<?=Yii::$app->params['imgUrl'].$v['pictures'][0]?>" alt="">
             </div>            
             <div class="list-info">
-                <span class="price">议价</span>
+                <span class="price"><a href="<?=Url::to(['/detail', 'id' => $v['id']])?>">议价</a></span>
                 <p class="title"><?=$v['title']?></p>
                 <p class="num">服务商：<?=$v['num']?></p>
                 <p class="area">所在地区：<?=$v['delivery_area']?></p>

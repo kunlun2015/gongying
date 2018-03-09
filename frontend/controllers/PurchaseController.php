@@ -20,11 +20,23 @@ class PurchaseController extends AppController {
     {
         $published = new Published;
         $type = 1;
-        $keywords = $this->request->get('keywords');
+        $data['keywords'] = $this->request->get('keywords');
         $fid = 0;
         $page = 1;
         $pageSize = $this->pageSize;
-        $data['list'] = $published->dataList($type, $keywords, $fid, $page, $pageSize, $totalPage);
+        $data['list'] = $published->dataList($type, $data['keywords'], $fid, $page, $pageSize, $data['totalPage']);
         return $this->render('index', $data);
+    }
+
+    public function actionGetData()
+    {
+        $published = new Published;
+        $type = 1;
+        $keywords = $this->request->post('keywords');
+        $fid = 0;
+        $page = intval($this->request->post('page')) ? intval($this->request->post('page')) : 1;
+        $pageSize = $this->pageSize;
+        $data['list'] = $published->dataList($type, $keywords, $fid, $page, $pageSize, $data['totalPage']);
+        $this->jsonExit(0, '数据加载成功', $data['list']);
     }
 }

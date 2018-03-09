@@ -160,6 +160,26 @@ $(document).ready(function(){
     };
     var _t = new Stream(config);
 
+    var clickedUploadPicture;
+    //查看上传图片
+    $('#uploaderFiles').on("click", "li", function(){
+        clickedUploadPicture = $(this);
+        $('#galleryImg').attr("style", this.getAttribute("style"));
+        $('#gallery').fadeIn(100);
+        return false;
+    });
+    
+    $('.weui-gallery__img').on("click", function(){
+        $('#gallery').fadeOut(100);
+        return false;
+    });
+    //删除已上传的图片
+    $(document).on('click', '.weui-icon_gallery-delete', function(){
+        clickedUploadPicture.remove();
+        $('#gallery').fadeOut(100);
+        return false;
+    })
+
     //保存表单
     $('.save-btn').click(function(){
         if(!$("input[name=title]").val()){
