@@ -13,9 +13,19 @@ use yii\web\Controller;
 use frontend\models\Published;
 
 class DetailController extends AppController {
+
+    private $published;
+
+    public function init()
+    {
+        parent::init();
+        $this->published = new Published;
+    }
     
     public function actionIndex()
-    {        
-        return $this->render('index');
+    {      
+        $id = $this->request->get('id');
+        $data['detail'] = $this->published->detail($id); 
+        return $this->render('index', $data);
     }
 }

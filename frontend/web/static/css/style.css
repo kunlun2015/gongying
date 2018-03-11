@@ -65,3 +65,7 @@
 
 .weui-loadmore{margin: 18px auto 43px auto !important;}
 .weui-loadmore .weui-loadmore__tips{background-color: #f7f7f7 !important;}
+
+.pictures-list{margin: 10px 0;}
+.pictures-list img{max-width: 100%;display: block;margin: 2px auto;}
+.list-info .action-btn a{padding: 2px 8px;border: 1px solid #09c;border-radius: 15px;background-color: #09c;color: #fff;}

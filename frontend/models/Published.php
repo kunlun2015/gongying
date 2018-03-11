@@ -41,6 +41,16 @@ class Published extends CommonModel
         return $list;
     }
 
+    /**
+     * 数据列表
+     * @param  int $type  1求购，2供应
+     * @param  string $keywords   搜索关键字
+     * @param  int $fid        一级分类id
+     * @param  int $page       页码
+     * @param  int $pageSize   页面记录条数
+     * @param  int &$totalPage 总页数
+     * @return array
+     */
     public function dataList($type, $keywords, $fid, $page, $pageSize, &$totalPage)
     {
         $offset = ($page - 1)*$pageSize;
@@ -69,5 +79,24 @@ class Published extends CommonModel
             $list[$k]['tname'] = $classify->classifyById($v['tid'])['name'];
         }
         return $list;
+    }
+
+    /**
+     * 获取发布详情
+     * @param  int $id 发布id
+     * @return array
+     */
+    public function detail($id)
+    {
+        $detail = $this->db->createCommand('select id, suid, fid, sid, tid, type, title, num, budget, delivery_cycle, deadline, delivery_area, description, pictures, anonymous, created_at, updated_at from {{%published}} where id = :id', ['id' => $id])->queryOne();
+        if(!$detail){
+            return false;
+        }
+        $classify = new Classify;
+        $detail['pictures'] = explode(',', $detail['pictures']);
+        $detail['fname'] = $classify->classifyById($detail['fid'])['name'];
+        $detail['sname'] = $classify->classifyById($detail['sid'])['name'];
+        $detail['tname'] = $classify->classifyById($detail['tid'])['name'];
+        return $detail;
     }
 }
