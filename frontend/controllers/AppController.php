@@ -10,6 +10,8 @@ namespace frontend\controllers;
 use Yii;
 use yii\web\Controller;
 use common\models\Log;
+use frontend\models\Wx;
+use frontend\models\User;
 
 class AppController extends Controller {
     
@@ -42,14 +44,25 @@ class AppController extends Controller {
      */
     public function beforeAction($action)
     {
-        $this->log = new Log;
+        $this->log = new Log;        
         
-        $this->session->set('user', [
-            'suid' => 1,
-            'username' => 'Amos',
-            'avatar' => $this->app->params['staticUrl'].'/images/avatar.jpg'
-        ]);
+        if(!$this->session->get('user')){
+            $wxUserInfo = (new Wx)->userInfo();
+        }
 
+        $user = new User;
+        $userInfo = $user->detailByOpenId($wxUserInfo['openid']);
+        if(!$userInfo){
+            if(!$user->insert([
+                'openid' => $wxUserInfo['openid'],
+                'username' => $wxUserInfo['nickname']
+            ])){
+              exit('用户信息存储失败！');  
+            }
+            $userInfo = $user->detailByOpenId($wxUserInfo['openid']);
+        }
+
+        $this->session->set('user', $userInfo);
         return true;
     }
 

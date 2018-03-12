@@ -13,11 +13,13 @@ class CommonModel extends \common\models\CommonModel
 {
     protected $db;
     protected $params;
+    protected $app;
 
     public function init()
     {
-        $this->db = Yii::$app->db;
-        $this->params = Yii::$app->params;
+        $this->app = Yii::$app;
+        $this->db = $this->app->db;
+        $this->params = $this->app->params;
     }
 
     //获取总页数

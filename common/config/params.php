@@ -4,14 +4,10 @@ return [
     'supportEmail' => 'support@example.com',
     'fileSavePath' => dirname(dirname(__DIR__)).'/upload/',
     'uploadSaveDirs' => array('avatar', 'banner', 'posts'),
-    'imgUrl' => 'http://localhost/gongying/upload/',    
+    'imgUrl' => 'http://img.gongying.debugphp.com/',    
     'logRootPath' => dirname(dirname(__DIR__)).'/log/',
-    'cateMap' => [
-        1 => 'php',
-        2 => 'db',
-        3 => 'server',
-        4 => 'frame',
-        5 => 'web',
-        6 => 'news'
+    'wx' => [
+        'appId' => 'wx1bfc812312887fd2',
+        'appSecret' => 'eccb65fc93ef74d2109a005ddceaab48'
     ]
 ];
