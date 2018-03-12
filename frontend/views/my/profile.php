@@ -12,7 +12,7 @@
     <img src="<?=$user['avatar']?>">
 </div>
 <div class="weui-cells">
-    <a href="" class="weui-cell weui-cell_access">
+    <a href="<?=Url::to(['/my/select-avatar'])?>" class="weui-cell weui-cell_access">
         <div class="weui-cell__bd">
             <span style="vertical-align: middle">修改头像</span>
         </div>

@@ -30,6 +30,7 @@ class MyController extends AppController {
         return $this->render('index', $data);
     }
 
+    //我的发布
     public function actionPublished()
     {
         $pageSize = 10;
@@ -49,5 +50,25 @@ class MyController extends AppController {
     {
         $data['user'] = $this->user;
         return $this->render('profile', $data);
+    }
+
+    //选择头像文件
+    public function actionSelectAvatar()
+    {
+        return $this->render('selectAvatar');
+    }
+
+    //保存头像文件
+    public function actionSaveAvatar()
+    {
+        $base64 = $this->request->post('base64');
+        $upload = new \common\models\Upload;
+        $upload->saveDir = 'avatar';
+        $rst = $upload->saveBase64Img($base64);
+        if($rst['code'] === 0){
+            $this->jsonExit(0, '头像保存成功', ['url' => '/my/profile']);
+        }else{
+            $this->jsonExit(-1, '头像保存失败');
+        }
     }
 }

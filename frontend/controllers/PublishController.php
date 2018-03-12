@@ -35,6 +35,18 @@ class PublishController extends AppController {
         return $this->render('type');
     }
 
+    //编辑发布
+    public function actionEdit()
+    {
+        $id = $this->request->get('id');
+        $classify = new Classify;
+        $published = new Published;
+        $data['classify'] = $classify->classifyList();
+        $data['detail'] = $published->detail($id);
+        return $this->render('edit', $data);
+    }
+
+    //发布保存
     public function actionSave()
     {
         $publish = new Published;
@@ -83,6 +95,69 @@ class PublishController extends AppController {
             $this->jsonExit(0, '发布成功', ['url' => Url::to(['/'])]);
         }else{
             $this->jsonExit(-1, '发布失败，请稍后重试');
+        }
+    }
+
+    //更新发布
+    public function actionUpdate()
+    {
+        $publish = new Published;
+        $type = (int)$this->request->post('type');
+        $id = (int)$this->request->post('id');
+        if($type === 1){
+            $data = [
+                'title' => $this->request->post('title'),
+                'num' => $this->request->post('num'),
+                'fid' => $this->request->post('fid'),
+                'sid' => $this->request->post('sid'),
+                'tid' => $this->request->post('tid'),
+                'budget' => $this->request->post('budget'),
+                'delivery_cycle' => $this->request->post('delivery_cycle'),
+                'deadline' => $this->request->post('deadline'),
+                'delivery_area' => $this->request->post('delivery_area'),
+                'description' => $this->request->post('description'),
+                'pictures' => $this->request->post('pictures') ? implode(',', $this->request->post('pictures')) : '',
+                'anonymous' => $this->request->post('anonymous') ? $this->request->post('anonymous') : 0,
+                'updated_at' => date('Y-m-d H:i:s')
+            ];
+        }elseif($type === 2){
+            $data = [
+                'title' => $this->request->post('title'),
+                'fid' => $this->request->post('fid'),
+                'sid' => $this->request->post('sid'),
+                'tid' => $this->request->post('tid'),
+                'delivery_area' => $this->request->post('delivery_area'),
+                'description' => $this->request->post('description'),
+                'pictures' => $this->request->post('pictures') ? implode(',', $this->request->post('pictures')) : '',
+                'anonymous' => $this->request->post('anonymous') ? $this->request->post('anonymous') : 0,
+                'updated_at' => date('Y-m-d H:i:s')
+            ];
+        }
+        
+        //取第一张图片生成封面缩略图
+        $pictures = explode(',', $data['pictures']);
+        $thumbPath = Yii::$app->params['fileSavePath'].$pictures[0];        
+        $editor = Grafika::createEditor();
+        $editor->open($thumb, $thumbPath);
+        $editor->resizeFill($thumb , 80 , 80);
+        $editor->save($thumb , $thumbPath.'.thumb.jpg');
+
+        if($publish->update($id, $data)){
+            $this->jsonExit(0, '编辑成功', ['url' => Url::to(['/my/published'])]);
+        }else{
+            $this->jsonExit(-1, '编辑失败，请稍后重试');
+        }
+    }
+
+    //删除发布
+    public function actionDelete()
+    {
+        $published = new Published;
+        $id = $this->request->post('id');
+        if($published->delete($id)){
+            $this->jsonExit(0, '删除成功');
+        }else{
+            $this->jsonExit(-1, '删除失败,请稍后重试');
         }
     }
 }

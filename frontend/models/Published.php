@@ -23,6 +23,27 @@ class Published extends CommonModel
     }
 
     /**
+     * 更新已发布内容
+     * @param  int $id
+     * @param  array $data
+     * @return boolen
+     */
+    public function update($id, $data)
+    {
+        return $this->db->createCommand()->update('{{%published}}', $data, ['id' => $id])->execute();
+    }
+
+    /**
+     * 删除发布
+     * @param  int $id
+     * @return boolen
+     */
+    public function delete($id)
+    {
+        return $this->db->createCommand()->delete('{{%published}}', ['id' => $id])->execute();
+    }
+
+    /**
      * 首页数据列表
      * @param  int $type 数据类型 1求购(订单)，2供应
      * @param  [type] $pageSize 数据条数

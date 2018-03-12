@@ -202,4 +202,27 @@ $(document).ready(function(){
             }
         })
     })
+
+    //更新表单
+    $('.update-btn').click(function(){
+        if(!$("input[name=title]").val()){
+            $.alert("请输入采购物资名称", function(){
+                $("input[name=title]").focus()
+            });
+            return false;
+        }
+        tools.ajax({
+            url: '/publish/update',
+            dataType: 'json',
+            type: 'post',
+            data: $('.publish-form form').serialize(),
+            success: function(res){
+                if(res.code === 0){
+                    $.toast(res.msg, 1000, function(){
+                        window.location.href = res.data.url
+                    });
+                }
+            }
+        })
+    })
 })

@@ -21,8 +21,8 @@
             </div>            
             <div class="list-info">
                 <span class="price action-btn">
-                    <a href="javascript:;">编辑</a>
-                    <a href="javascript:;">删除</a>
+                    <a href="<?=Url::to(['/publish/edit', 'id' => $v['id']])?>">编辑</a>
+                    <a href="javascript:;" class="delete" data-id="<?=$v['id']?>">删除</a>
                 </span>
                 <p class="title"><?=$v['title']?></p>
                 <p class="num">数量：<?=$v['num']?></p>
@@ -49,8 +49,8 @@
             </div>            
             <div class="list-info">
                 <span class="price action-btn">
-                    <a href="javascript:;">编辑</a>
-                    <a href="javascript:;">删除</a>
+                    <a href="<?=Url::to(['/publish/edit', 'id' => $v['id']])?>">编辑</a>
+                    <a href="javascript:;" class="delete" data-id="<?=$v['id']?>">删除</a>
                 </span>
                 <p class="title"><?=$v['title']?></p>
                 <p class="num">服务商：<?=$v['num']?></p>
@@ -120,6 +120,29 @@
                 }
             })
         });
+        $(document).on('click', '.delete', function(){
+            var _this = $(this);
+            $.confirm("确定要删除吗？", function() {
+                tools.ajax({
+                    url: '/publish/delete',
+                    dataType: 'json',
+                    type: 'post',
+                    data: {id: _this.data('id')},
+                    success: function(res){
+                        if(res.code === 0){
+                            $.toast(res.msg, 1000, function(){
+                                _this.parents('li').remove();
+                            });
+                        }else{
+                            $.toast(res.msg, 'cancel');
+                        }
+                    }
+                })
+            }, function() {
+                
+            });
+            return false;
+        })
     })
 <?php $this->endBlock() ?>
 <?php $this->registerJs($this->blocks["pageJs"], \yii\web\View::POS_END); ?>
