@@ -20,13 +20,13 @@ class User extends CommonModel
     */
     public function detailByOpenId($openid)
     {
-        return $this->db->createCommand('select id, openid, username, sex, mobile, company, position, avatar, status from {{%site_user}} where openid = :openid', ['openid' => $openid])->queryOne();
+       return $this->db->createCommand('select id, openid, username, sex, mobile, company, position, avatar, status from {{%site_users}} where openid = :openid', ['openid' => $openid])->queryOne();
     }
 
 
     public function insert($data)
     {
-        return $this->createCommand()->insert('{{%site_user}}', $data)->execute();
+        return $this->db->createCommand()->insert('{{%site_users}}', $data)->execute();
     }
 
 }

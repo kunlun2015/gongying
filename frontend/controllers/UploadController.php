@@ -25,8 +25,9 @@ class UploadController extends AppController {
         if(!is_dir(Yii::$app->params['fileSavePath'].'/'.$savePath)){
             mkdir(Yii::$app->params['fileSavePath'].'/'.$savePath, 0777, true);
         }
-        $this->app->cache->set($file['token'], $file);
-        exit(json_encode(['success' => true, 'token' => $file['token'], 'message' => 'ok']));
+        if($this->app->cache->set($file['token'], $file)){
+            exit(json_encode(['success' => true, 'token' => $file['token'], 'message' => 'ok']));
+        }        
     }
 
     public function actionPicture()

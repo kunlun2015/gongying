@@ -25,7 +25,32 @@ class DetailController extends AppController {
     public function actionIndex()
     {      
         $id = $this->request->get('id');
-        $data['detail'] = $this->published->detail($id); 
+        $suid = $this->session->get('user')['id'];
+        $data['detail'] = $this->published->detail($id);
+        $data['isCollected'] = $this->published->isCollected($suid, $id);
         return $this->render('index', $data);
+    }
+
+    /**
+     * 收藏/取消收藏
+     * @return json
+     */
+    public function actionCollect()
+    {
+        $pid = $this->request->post('pid');
+        $suid = $this->session->get('user')['id'];
+        if(!$this->published->isCollected($suid, $pid)){
+            if($this->published->collect($suid, $pid)){
+                $this->jsonExit(0, '收藏成功', ['status' => 1]);
+            }else{
+                $this->jsonExit(-1, '收藏失败，请稍后重试');
+            }
+        }else{
+            if($this->published->deleteCollected($suid, $pid)){
+                $this->jsonExit(0, '已取消收藏', ['status' => 0]);
+            }else{
+                $this->jsonExit(-1, '取消收藏失败，请稍后重试');
+            }
+        }
     }
 }

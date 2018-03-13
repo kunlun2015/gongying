@@ -99,11 +99,11 @@ class CommonModel extends Model {
      */
     protected function checkDir($dir)
     {
-        if(!is_dir($dir)){
+        if(!is_dir($dir)){            
+            mkdir($dir, 0777, true);
             if(!is_writeable($dir)){
                 exit('目录不可写：'.$dir);
             }
-            mkdir($dir, 0777, true);
         }
     }
 

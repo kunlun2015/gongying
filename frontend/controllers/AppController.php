@@ -44,25 +44,28 @@ class AppController extends Controller {
      */
     public function beforeAction($action)
     {
-        $this->log = new Log;        
-        
+        $this->log = new Log; 
+        $user = new User;       
+        $this->session->set('user', [
+            'id' => 1,
+            'openid' => 'sdfgfg'
+        ]);
         if(!$this->session->get('user')){
             $wxUserInfo = (new Wx)->userInfo();
-        }
-
-        $user = new User;
-        $userInfo = $user->detailByOpenId($wxUserInfo['openid']);
-        if(!$userInfo){
-            if(!$user->insert([
-                'openid' => $wxUserInfo['openid'],
-                'username' => $wxUserInfo['nickname']
-            ])){
-              exit('用户信息存储失败！');  
-            }
             $userInfo = $user->detailByOpenId($wxUserInfo['openid']);
+            if(!$userInfo){
+                if(!$user->insert([
+                    'openid' => $wxUserInfo['openid'],
+                    'username' => $wxUserInfo['nickname']
+                ])){
+                  exit('用户信息存储失败！');  
+                }
+                $userInfo = $user->detailByOpenId($wxUserInfo['openid']);
+                $this->session->set('user', $userInfo);
+            }else{
+                $this->session->set('user', $userInfo);
+            }
         }
-
-        $this->session->set('user', $userInfo);
         return true;
     }
 

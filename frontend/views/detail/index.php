@@ -7,6 +7,7 @@
  */
     $this->title = '详情页';
     use yii\helpers\Url;
+    \frontend\assets\AppAsset::addScript($this, 'js/detail.js');
 ?>
 <style>    
     .weui-form-preview__value{text-align: left;font-size: 18px !important;}
@@ -42,7 +43,7 @@
     </div>
 </div>
 <div class="weui-cells__title">描述说明</div>
-<div class="weui-form-preview">
+<div class="weui-form-preview mb-55">
     <div class="weui-form-preview__hd">
         <em class="weui-form-preview__value"><?=$detail['description']?></em>
         <div class="pictures-list">
@@ -50,5 +51,20 @@
             <img src="<?=Yii::$app->params['imgUrl'].$v?>" alt="<?=$detail['title']?>">
             <?php } ?>
         </div>
+    </div>
+</div>
+<input type="hidden" name="publishedId" value="<?=$detail['id']?>">
+<div class="detail-bottom">
+    <div class="btn-group-small">
+        <a href="javascript:;" class="btn btn-share">
+            <i class="fa fa-share-alt"></i>分享
+        </a>
+        <a href="javascript:;" class="btn btn-collect">
+            <i class="fa <?php if($isCollected){ ?>fa-star<?php }else{ ?>fa-star-o<?php } ?>"></i>收藏
+        </a>
+    </div>
+    <div class="btn-group-large">
+        <a href="javascript:;" class="btn">电话联系</a>
+        <a class="btn">发消息</a>
     </div>
 </div>

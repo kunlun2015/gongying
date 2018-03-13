@@ -9,7 +9,7 @@
     use yii\helpers\Url;
 ?>
 <div class="avatar">
-    <img src="<?=$user['avatar']?>">
+    <img src="<?=Yii::$app->params['imgUrl'].$user['avatar']?>">
 </div>
 <div class="weui-cells">
     <a href="<?=Url::to(['/my/select-avatar'])?>" class="weui-cell weui-cell_access">

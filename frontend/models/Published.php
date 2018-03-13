@@ -120,4 +120,37 @@ class Published extends CommonModel
         $detail['tname'] = $classify->classifyById($detail['tid'])['name'];
         return $detail;
     }
+
+    /**
+     * 是否收藏该发布内容
+     * @param  int  $suid 用户id
+     * @param  int  $pid  发布内容id
+     * @return boolean
+     */
+    public function isCollected($suid, $pid)
+    {
+        return $this->db->createCommand('select id from {{%collection}} where suid = :suid and pid = :pid', ['suid' => $suid, 'pid' => $pid])->queryOne();
+    }
+
+    /**
+     * 是否收藏该发布内容
+     * @param  int  $suid 用户id
+     * @param  int  $pid  发布内容id
+     * @return boolean
+     */
+    public function collect($suid, $pid)
+    {
+        return $this->db->createCommand()->insert('{{%collection}}', ['suid' => $suid, 'pid' => $pid])->execute();
+    }
+
+    /**
+     * 取消收藏
+     * @param  int  $suid 用户id
+     * @param  int  $pid  发布内容id
+     * @return boolean
+     */
+    public function deleteCollected($suid, $pid)
+    {
+        return $this->db->createCommand()->delete('{{%collection}}', ['suid' => $suid, 'pid' => $pid])->execute();
+    }
 }

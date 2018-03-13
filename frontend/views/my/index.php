@@ -11,7 +11,7 @@
 <div class="weui-cells">
     <a href="<?=Url::to(['/my/profile'])?>"  class="weui-cell weui-cell_access">
         <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-            <img src="<?=$user['avatar']?>" style="width: 50px;display: block">
+            <img src="<?=Yii::$app->params['imgUrl'].$user['avatar']?>" style="width: 50px;display: block">
         </div>
         <div class="weui-cell__bd">
             <p><?=$user['username']?></p>

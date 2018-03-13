@@ -31,7 +31,7 @@ class Upload extends CommonModel{
         $base64Info = explode(',', $base64);
         $img = base64_decode($base64Info[1]);
         $savePath = $fileSavePath.'/'.$this->uploadFileNamed().'.jpeg';
-        $rst = file_put_contents($this->saveRootDir.'/'.$savePath, $img);
+        $rst = file_put_contents($this->saveRootDir.$savePath, $img);
         if($rst){
             return array('code' => 0, 'msg' => '图片已保存！', 'path' => $savePath);
         }else{
