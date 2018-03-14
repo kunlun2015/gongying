@@ -17,4 +17,10 @@ class MessageController extends AppController {
     {
         return $this->render('index');
     }
+
+    
+    public function actionDetail()
+    {
+        return $this->render('detail');
+    }
 }

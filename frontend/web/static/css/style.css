@@ -84,3 +84,17 @@
 .detail-bottom .btn-group-large{width: 65%;float: left;margin: 8px 0;}
 .detail-bottom .btn-group-large .btn{float: left;width: 45%;height: 30px;line-height: 30px;text-align: center;margin: 0 2%;background-color: #09c;color: #fff;}
 .detail-bottom .btn-group-large .btn:last-child{background-color: #fff;color: #09c;border: 1px solid #09c;box-sizing: border-box;}
+
+.chat{padding: 10px 15px;overflow: hidden;}
+.chat .avatar{width: 50px;height: 50px;border-radius: 50px;overflow: hidden;float: left;margin: 5px 0;}
+.chat .avatar img{width: 50px;}
+.chat .message{float: left;width: 100%;clear: left;padding: 10px 0;}
+.chat .author-name{font-size: 12px;margin-left: 15px;}
+.chat .content{overflow: hidden;}
+.message-text-wrap{position: relative;background-color: #fff;border: 1px solid #f7f7f7;padding: 6px 10px;margin-left: 15px;display: inline-block;max-width: 85%;}
+.message-text-wrap:before{content: '';display: inline-block;box-sizing: border-box;width: 10px;height: 10px;position: absolute;top: 5px;background-color: inherit;left: -5px;transform: rotate(135deg);}
+.message.me{float: right;clear: right;text-align: right;}
+.message.me .avatar{float: right;}
+.message.me .author-name{margin-right: 15px;}
+.message.me .message-text-wrap{background-color: #6c9a36;color: #fff;margin-right: 15px;}
+.message.me .message-text-wrap:before{right: -5px;transform: rotate(-45deg);left: auto;}

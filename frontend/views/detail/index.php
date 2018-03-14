@@ -65,6 +65,6 @@
     </div>
     <div class="btn-group-large">
         <a href="javascript:;" class="btn">电话联系</a>
-        <a class="btn">发消息</a>
+        <a href="<?=Url::to(['/message/detail', 'toId' => $detail['suid']])?>" class="btn">发消息</a>
     </div>
 </div>
