@@ -10,17 +10,69 @@ namespace frontend\controllers;
 
 use Yii;
 use yii\web\Controller;
+use frontend\models\User;
+use frontend\models\Message;
 
 class MessageController extends AppController {
 
+    private $user;
+
+    public function init()
+    {
+        parent::init();
+        $this->user = $this->session->get('user');
+    }
+
     public function actionIndex()
     {
-        return $this->render('index');
+        $message = new Message;
+        $page = 1;
+        $pageSize = 10;
+        $data['list'] = $message->messageList($this->user['id'], $page, $pageSize, $totalPage);
+        return $this->render('index', $data);
     }
 
     
     public function actionDetail()
+    {   
+        $toId = (int)$this->request->get('toId');
+        $data['toUser'] = (new User)->userUInfoByUid($toId);
+        if(!$data['toUser']){
+            exit('用户不存在');
+        }
+        $data['user'] = $this->user;
+        $message = new Message;
+        $rid = $message->isHasMessaged($this->user['id'], $toId);
+        $page = 1;
+        $pageSize = 10;
+        $data['message'] = $message->messageDetail($rid, $page, $pageSize, $totalPage);
+        return $this->render('detail', $data);
+    }
+
+    public function actionSend()
     {
-        return $this->render('detail');
+        $time = date('Y-m-d H:i:s');
+        $rid = (int)$this->request->post('rid');
+        $data = [
+            'message' => $this->request->post('message'),
+            'suid' => $this->user['id'],
+            'to_suid' => $this->request->post('tuid'),
+            'time' => $time
+        ];
+        $message = new Message;
+        if($rid){
+
+        }else{
+            if($rid = $message->insert($data)){
+                $this->jsonExit(0, '消息发送成功', [
+                    'rid' => $rid,
+                    'message' => $data['message'], 
+                    'time' => $time
+                ]);
+            }else{
+                $this->jsonExit(-1, '消息发送失败');
+            }
+        }
+
     }
 }

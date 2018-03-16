@@ -40,6 +40,7 @@ var tools = {
             type: params.type,
             dataType: params.dataType,
             data: params.data,
+            beforeSend: params.beforeSend ? params.beforeSend : function(){},
             success: params.success,
             error: params.error ? params.error : function(){},
             complete: params.complete ? params.complete : function(){}

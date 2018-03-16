@@ -48,7 +48,9 @@ class AppController extends Controller {
         $user = new User;       
         $this->session->set('user', [
             'id' => 1,
-            'openid' => 'sdfgfg'
+            'openid' => 'sdfgfg',
+            'username' => 'Amos',
+            'avatar' => 'avatar/2018/03/3J9na83TIzrE20180316101442.jpeg'
         ]);
         if(!$this->session->get('user')){
             $wxUserInfo = (new Wx)->userInfo();

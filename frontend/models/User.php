@@ -29,4 +29,13 @@ class User extends CommonModel
         return $this->db->createCommand()->insert('{{%site_users}}', $data)->execute();
     }
 
+    /**
+     * 查询用户是否存在，并返回用户信息
+     * @param  int  $suid
+     * @return boolean/array
+     */
+    public function userUInfoByUid($suid){
+        return $this->db->createCommand('select id, openid, username, avatar from {{%site_users}} where id = :suid', ['suid' => $suid])->queryOne();
+    }
+
 }

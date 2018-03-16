@@ -98,3 +98,5 @@
 .message.me .author-name{margin-right: 15px;}
 .message.me .message-text-wrap{background-color: #6c9a36;color: #fff;margin-right: 15px;}
 .message.me .message-text-wrap:before{right: -5px;transform: rotate(-45deg);left: auto;}
+
+.send-input{position: fixed !important;bottom: 0;width: 100%;background-color: #fff;box-sizing: border-box;}
