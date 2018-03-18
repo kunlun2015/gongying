@@ -46,6 +46,32 @@ class MyController extends AppController {
         return $this->render('published', $data);
     }
 
+    public function actionCollected()
+    {
+        $pageSize = 5;
+        if($this->request->isAjax && $this->request->isPost){
+            $page = $this->request->post('page');
+            $type = $this->request->post('type');
+            $list = $this->my->collected($this->user['id'], $type, $page, $pageSize, $data['totalPage']);
+            $this->jsonExit(0, '数据加载成功', $list);
+
+        }
+        $data['purchaseList'] = $this->my->collected($this->user['id'], 1, 1, $pageSize, $data['purchaseTotalPage']);
+        $data['supplyList'] = $this->my->collected($this->user['id'], 2, 1, $pageSize, $data['supplyTotalPage']);
+        return $this->render('collected', $data);
+    }
+
+    //删除收藏
+    public function actionDeleteCollected()
+    {
+        $id = $this->request->post('id');
+        if($this->my->deleteCollected($this->user['id'], $id)){
+            $this->jsonExit(0, '删除成功');
+        }else{
+            $this->jsonExit(-1, '删除失败，请稍后重试');
+        }
+    }
+
     public function actionProfile()
     {
         $data['user'] = $this->user;

@@ -9,6 +9,7 @@
 namespace frontend\models;
 use yii;
 use yii\base\Model;
+use yii\db\Expression;
 
 class Message extends CommonModel
 {
@@ -17,30 +18,41 @@ class Message extends CommonModel
      * @param  array $data 
      * @return int/boolen rid/flase
      */
-    public function insert($data)
+    public function insert($rid, $data)
     {
         $transaction = $this->db->beginTransaction();
         try {
-            //创建聊天室
-            $this->db->createCommand()->insert('{{%message_room}}', [
-                'suid' => $data['suid'],
-                'to_suid' => $data['to_suid'],
-                'last_message' => $data['message'],
-                'nums' => 1,
-                'updated_at' => $data['time'],
-                'created_at' => $data['time']
-            ])->execute();
-            $rid = $this->db->getLastInsertID();
-            //创建用户参与记录
-            $this->db->createCommand()->insert('{{%message_users}}', [
-                'rid' => $rid,
-                'suid' => $data['suid']
-            ])->execute();
-            $this->db->createCommand()->insert('{{%message_users}}', [
-                'rid' => $rid,
-                'suid' => $data['to_suid'],
-                'isnew' => 1
-            ])->execute();
+            if($rid){
+                //更新聊天室
+                $rst = $this->db->createCommand()->update('{{%message_room}}', [
+                    'last_message' => $data['message'],
+                    'nums' => new Expression('nums+ 1'),
+                    'updated_at' => $data['time']
+                ], ['id' => $rid])->execute();
+                //更新消息状态
+                $this->db->createCommand()->update('{{%message_users}}', ['isnew' => 1], ['rid' => $rid, 'suid' => $data['to_suid']])->execute();
+            }else{
+                //创建聊天室
+                $this->db->createCommand()->insert('{{%message_room}}', [
+                    'suid' => $data['suid'],
+                    'to_suid' => $data['to_suid'],
+                    'last_message' => $data['message'],
+                    'nums' => 1,
+                    'updated_at' => $data['time'],
+                    'created_at' => $data['time']
+                ])->execute();
+                $rid = $this->db->getLastInsertID();
+                //创建用户参与记录
+                $this->db->createCommand()->insert('{{%message_users}}', [
+                    'rid' => $rid,
+                    'suid' => $data['suid']
+                ])->execute();
+                $this->db->createCommand()->insert('{{%message_users}}', [
+                    'rid' => $rid,
+                    'suid' => $data['to_suid'],
+                    'isnew' => 1
+                ])->execute();
+            }
             //插入消息记录
             $this->db->createCommand()->insert('{{%message_text}}', [
                 'rid' => $rid,
@@ -56,7 +68,7 @@ class Message extends CommonModel
             return false;
         } catch (\Throwable $e) {
             $transaction->rollBack();
-            //throw $e;
+            throw $e;
             return false;
         }
     }
@@ -74,7 +86,7 @@ class Message extends CommonModel
     /**
      * 消息列表
      * @param  int $suid       用户suid
-    * @param  int $page        页码 
+     * @param  int $page        页码 
      * @param  int $pageSize   每页条数
      * @param  int &$totalPage 总页数
      * @return array
@@ -82,11 +94,15 @@ class Message extends CommonModel
     public function messageList($suid, $page, $pageSize, &$totalPage)
     {
         $offset = ($page - 1)*$pageSize;
-        $list = $this->db->createCommand('select rid, t1.suid, isnew, to_suid, username, avatar, last_message, updated_at from {{%message_users}} as t1 left join {{%message_room}} as t2 on t1.rid = t2.id left join {{%site_users}} as t3 on to_suid = t3.id where t1.suid = :suid order by t2.updated_at desc limit :offset, :pageSize', [
+        $list = $this->db->createCommand('select rid, t2.suid, isnew, to_suid, last_message, updated_at from {{%message_users}} as t1 left join {{%message_room}} as t2 on t1.rid = t2.id where t1.suid = :suid order by t2.updated_at desc limit :offset, :pageSize', [
             'suid' => $suid,
             'offset' => $offset,
             'pageSize' => $pageSize
         ])->queryAll();
+        foreach ($list as $k => $v) {
+            $toUser = $this->db->createCommand('select username, avatar from {{%site_users}} where id = :toUserId', ['toUserId' => $v['suid'] == $suid ? $v['to_suid'] : $v['suid']])->queryOne();
+            $list[$k] = array_merge($list[$k], $toUser);
+        }
         $sqlTotal = 'select count(*) from {{%message_users}} where suid = '.$suid;
         $totalPage = $this->getTotalPage($sqlTotal, $pageSize);
         return $list;

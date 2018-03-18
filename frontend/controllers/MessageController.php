@@ -28,6 +28,7 @@ class MessageController extends AppController {
         $message = new Message;
         $page = 1;
         $pageSize = 10;
+        $data['user'] = $this->user;
         $data['list'] = $message->messageList($this->user['id'], $page, $pageSize, $totalPage);
         return $this->render('index', $data);
     }
@@ -42,10 +43,11 @@ class MessageController extends AppController {
         }
         $data['user'] = $this->user;
         $message = new Message;
-        $rid = $message->isHasMessaged($this->user['id'], $toId);
+        $data['rid'] = $message->isHasMessaged($this->user['id'], $toId);
         $page = 1;
         $pageSize = 10;
-        $data['message'] = $message->messageDetail($rid, $page, $pageSize, $totalPage);
+        $data['message'] = [];
+        $data['rid'] && $data['message'] = $message->messageDetail($data['rid'], $page, $pageSize, $totalPage);
         return $this->render('detail', $data);
     }
 
@@ -59,19 +61,15 @@ class MessageController extends AppController {
             'to_suid' => $this->request->post('tuid'),
             'time' => $time
         ];
-        $message = new Message;
-        if($rid){
-
+        $message = new Message;        
+        if($rid = $message->insert($rid, $data)){
+            $this->jsonExit(0, '消息发送成功', [
+                'rid' => $rid,
+                'message' => $data['message'], 
+                'time' => $time
+            ]);
         }else{
-            if($rid = $message->insert($data)){
-                $this->jsonExit(0, '消息发送成功', [
-                    'rid' => $rid,
-                    'message' => $data['message'], 
-                    'time' => $time
-                ]);
-            }else{
-                $this->jsonExit(-1, '消息发送失败');
-            }
+            $this->jsonExit(-1, '消息发送失败');
         }
 
     }

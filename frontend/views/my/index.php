@@ -24,7 +24,7 @@
         </div>
         <div class="weui-cell__ft"></div>
     </a>
-    <a href="" class="weui-cell weui-cell weui-cell_access">
+    <a href="<?=Url::to(['/my/collected'])?>" class="weui-cell weui-cell weui-cell_access">
         <div class="weui-cell__bd">
             <span style="vertical-align: middle">我的收藏</span>            
         </div>

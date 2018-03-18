@@ -5,7 +5,7 @@
  * @date    2018-03-16 11:42:48
  * @version $Id$
  */
-    $this->title = '消息';
+    $this->title = '消息列表';
     use yii\helpers\Url;
 ?>
 <style>
@@ -14,7 +14,7 @@
 <div class="weui-panel weui-panel_access message-list">
     <div class="weui-panel__bd">
         <?php foreach ($list as $k => $v) {?>
-        <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+        <a href="<?=Url::to(['/message/detail', 'toId' => ($user['id'] == $v['suid']) ? $v['to_suid'] : $v['suid']])?>" class="weui-media-box weui-media-box_appmsg">
             <div class="weui-media-box__hd">
                 <img class="weui-media-box__thumb" src="<?=Yii::$app->params['imgUrl'].$v['avatar']?>" alt="">
                 <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">8</span>

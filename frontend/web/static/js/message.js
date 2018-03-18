@@ -12,7 +12,7 @@ $(function(){
             url: '/message/send',
             dataType: 'json',
             type: 'post',
-            data: {message: message, tuid: $("input[name=tuid]").val()},
+            data: {rid: $("input[name='rid']").val(), message: message, tuid: $("input[name=tuid]").val()},
             beforeSend: function(){
                 if(!message){
                     $.alert("请输入您要发送的内容", function(){
