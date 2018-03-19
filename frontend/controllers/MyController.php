@@ -84,6 +84,25 @@ class MyController extends AppController {
         return $this->render('selectAvatar');
     }
 
+    public function actionEditProfile()
+    {
+        if($this->request->isAjax && $this->request->isPost){
+            $data = [
+                'username' => $this->request->post('username'),
+                'mobile'   => $this->request->post('mobile'),
+                'company'  => $this->request->post('company'),
+                'position' => $this->request->post('position')
+            ];
+            if($this->my->update($this->user['id'], $data)){
+                $this->jsonExit(0, '资料更新成功', ['url' => '/my/profile']);
+            }else{
+                $this->jsonExit(-1, '资料更新失败');
+            }
+        }
+        $data['user'] = $this->my->getEditInfo($this->user['id']);
+        return $this->render('editProfile', $data);
+    }
+
     //保存头像文件
     public function actionSaveAvatar()
     {

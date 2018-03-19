@@ -10,7 +10,7 @@
 ?>
 <header>
     <div class="logo">
-        <img src="http://local.gongying.com/static/images/logo.png" alt="">
+        <img src="<?=Yii::$app->params['staticUrl']?>images/logo.png" alt="">
     </div>
     <div class="search">
         <div class="weui-search-bar" id="searchBar">
@@ -37,7 +37,7 @@
                 <img src="<?=Yii::$app->params['imgUrl'].$v['pictures'][0]?>.thumb.jpg" alt="<?=$v['title']?>">
             </div>            
             <div class="list-info">
-                <span class="price">议价</span>
+                <span class="price"><a href="<?=Url::to(['/detail', 'id' => $v['id']])?>">议价</a></span>
                 <p class="title"><?=$v['title']?></p>
                 <p class="num">数量：<?=$v['num']?></p>
                 <p class="area">交付地区：<?=$v['delivery_area']?></p>
@@ -49,13 +49,13 @@
                 <span><?=$v['sname']?></span>
                 <span><?=$v['tname']?></span>
             </div>
-            <div class="keywords"><a href="">#<?=$v['fname']?>#</a></div>
+            <div class="keywords"><a href="<?=Url::to(['/list', 'fid' => $v['fid']])?>">#<?=$v['fname']?>#</a></div>
         </div>            
     </li>
     <?php } ?>
 </ul>
 <div class="weui-loadmore weui-loadmore_line" data-page="1" data-total="<?=$totalPage?>">
-  <span class="weui-loadmore__tips"><?php if($totalPage < 1){ ?>暂无数据<?php }else{ ?>上滑加载更多<?php } ?></span>
+  <span class="weui-loadmore__tips"><?php if($totalPage < 1){ ?>暂无数据<?php }elseif($totalPage == 1){?>已加载全部<?php }else{ ?>上滑加载更多<?php } ?></span>
 </div>
 <?php $this->beginBlock("pageJs") ?>
     $(document).ready(function(){

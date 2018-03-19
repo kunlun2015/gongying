@@ -21,10 +21,12 @@ class PurchaseController extends AppController {
         $published = new Published;
         $type = 1;
         $data['keywords'] = $this->request->get('keywords');
-        $fid = 0;
+        $fid = (int)$this->request->get('fid') ? $this->request->get('fid') : 0;
+        $sid = (int)$this->request->get('sid') ? $this->request->get('sid') : 0;
+        $tid = (int)$this->request->get('tid') ? $this->request->get('tid') : 0;
         $page = 1;
         $pageSize = $this->pageSize;
-        $data['list'] = $published->dataList($type, $data['keywords'], $fid, $page, $pageSize, $data['totalPage']);
+        $data['list'] = $published->dataList($type, $data['keywords'], $fid, $sid, $tid, $page, $pageSize, $data['totalPage']);
         return $this->render('index', $data);
     }
 

@@ -16,6 +16,14 @@ use frontend\models\Published;
 use Grafika\Grafika;
 
 class PublishController extends AppController {
+
+    private $user;
+
+    public function init()
+    {
+        parent::init();
+        $this->user = $this->session->get('user');
+    }
     
     public function actionIndex()
     {
@@ -53,7 +61,7 @@ class PublishController extends AppController {
         $type = (int)$this->request->post('type');
         if($type === 1){
             $data = [
-                'suid' => 1,
+                'suid' => $this->user['id'],
                 'type' => $type,
                 'title' => $this->request->post('title'),
                 'num' => $this->request->post('num'),

@@ -91,4 +91,14 @@ class My extends CommonModel
     {
         return $this->db->createCommand()->delete('{{%collection}}', ['suid' => $suid, 'id' => $id])->execute();
     }
+
+    /**
+     * 获取用户更新信息
+     * @param  int $suid 用户uid
+     * @return array
+     */
+    public function getEditInfo($suid)
+    {
+        return $this->db->createCommand('select username, mobile,company, position from {{%site_users}} where id = :suid', ['suid' => $suid])->queryOne();
+    }
 }

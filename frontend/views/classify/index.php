@@ -24,7 +24,7 @@
         <dl>
             <dt><span></span><?=$v2['name']?></dt>
             <?php foreach ($v2['sub'] as $k3 => $v3) {?>
-            <dd><?=$v3['name']?></dd>
+            <dd><a href="<?=Url::to(['/list', 'tid' => $v3['id']])?>"><?=$v3['name']?></a></dd>
             <?php } ?>     
         </dl>
         <?php } ?>

@@ -129,4 +129,15 @@ class Message extends CommonModel
         return $list;
     }
 
+    /**
+     * 是否有新消息
+     * @param  int  $suid 用户uid
+     * @return boolean
+     */
+    public function isHasNewMessage($suid)
+    {
+        $newMessage = $this->db->createCommand('select id from {{%message_users}} where suid = :suid and isnew = 1', ['suid' => $suid])->queryOne();
+        return $newMessage ? true : false;
+    }
+
 }

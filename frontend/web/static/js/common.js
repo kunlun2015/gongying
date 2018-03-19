@@ -45,5 +45,13 @@ var tools = {
             error: params.error ? params.error : function(){},
             complete: params.complete ? params.complete : function(){}
         })
+    },
+    validate: {
+        mobile: function(mobile){        
+            return /^1[3|4|5|7|8][0-9]{9}$/.test(mobile);
+        },
+        email: function(email){
+            return /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/.test(email);
+        }
     }
 }

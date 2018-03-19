@@ -10,7 +10,7 @@
 ?>
 <header>
     <div class="logo">
-        <img src="http://local.gongying.com/static/images/logo.png" alt="">
+        <img src="<?=Yii::$app->params['staticUrl']?>images/logo.png" alt="">
     </div>
     <div class="search">
         <div class="weui-search-bar" id="searchBar">
@@ -41,7 +41,7 @@
                 <img src="<?=Yii::$app->params['imgUrl'].$v['pictures'][0]?>.thumb.jpg" alt="<?=$v['title']?>">
             </div>            
             <div class="list-info">
-                <span class="price">议价</span>
+                <span class="price"><a href="<?=Url::to(['/detail', 'id' => $v['id']])?>">议价</a></span>
                 <p class="title"><?=$v['title']?></p>
                 <p class="num">数量：<?=$v['num']?></p>
                 <p class="area">交付地区：<?=$v['delivery_area']?></p>
@@ -53,7 +53,7 @@
                 <span><?=$v['sname']?></span>
                 <span><?=$v['tname']?></span>
             </div>
-            <div class="keywords"><a href="">#<?=$v['fname']?>#</a></div>
+            <div class="keywords"><a href="<?=Url::to(['/list', 'fid' => $v['fid']])?>">#<?=$v['fname']?>#</a></div>
         </div>            
     </li>
     <?php } ?>
@@ -66,7 +66,7 @@
                 <img src="<?=Yii::$app->params['imgUrl'].$v['pictures'][0]?>" alt="">
             </div>            
             <div class="list-info">
-                <span class="price">议价</span>
+                <span class="price"><a href="<?=Url::to(['/detail', 'id' => $v['id']])?>">议价</a></span>
                 <p class="title"><?=$v['title']?></p>
                 <p class="num">服务商：<?=$v['num']?></p>
                 <p class="area">所在地区：<?=$v['delivery_area']?></p>
@@ -78,7 +78,7 @@
                 <span><?=$v['sname']?></span>
                 <span><?=$v['tname']?></span>
             </div>
-            <div class="keywords"><a href="">#<?=$v['fname']?>#</a></div>
+            <div class="keywords"><a href="<?=Url::to(['/list', 'fid' => $v['fid']])?>">#<?=$v['fname']?>#</a></div>
         </div>            
     </li>
     <?php } ?>
@@ -105,7 +105,7 @@
                 url: '/list/get-data',
                 dataType: 'json',
                 type: 'post',
-                data: {type: type, keywords: $('#searchInput').val(), page: page + 1},
+                data: {type: type, fid: <?=$fid?>, sid: <?=$sid?>, tid: <?=$tid?>, keywords: $('#searchInput').val(), page: page + 1},
                 success: function(res){
                     if(res.code === 0){
                         var html = '';

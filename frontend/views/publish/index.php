@@ -87,7 +87,7 @@
                     <div class="weui-uploader__bd">
                         <ul class="weui-uploader__files" id="uploaderFiles"></ul>
                         <div class="weui-uploader__input-box">
-                            <input id="uploaderInput" name="uploaderInput" class="weui-uploader__input" type="button" accept="image/*" multiple="">
+                            <div id="uploaderInput" class="weui-uploader__input" ></div>
                         </div>
                     </div>
                 </div>

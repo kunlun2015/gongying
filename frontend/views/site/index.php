@@ -13,7 +13,7 @@
 ?>
 <header>
     <div class="logo">
-        <img src="http://local.gongying.com/static/images/logo.png" alt="">
+        <img src="<?=Yii::$app->params['staticUrl']?>images/logo.png" alt="">
     </div>
     <div class="search">
         <div class="weui-search-bar" id="searchBar">
@@ -69,7 +69,7 @@
                 <span><?=$v['sname']?></span>
                 <span><?=$v['tname']?></span>
             </div>
-            <div class="keywords"><a href="">#<?=$v['fname']?>#</a></div>
+            <div class="keywords"><a href="<?=Url::to(['/list', 'fid' => $v['fid']])?>">#<?=$v['fname']?>#</a></div>
         </div>            
     </li>
     <?php } ?>
@@ -94,7 +94,7 @@
                 <span><?=$v['sname']?></span>
                 <span><?=$v['tname']?></span>
             </div>
-            <div class="keywords"><a href="">#<?=$v['fname']?>#</a></div>
+            <div class="keywords"><a href="<?=Url::to(['/list', 'fid' => $v['fid']])?>">#<?=$v['fname']?>#</a></div>
         </div>            
     </li>
     <?php } ?>

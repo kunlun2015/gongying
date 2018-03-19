@@ -17,7 +17,7 @@
         <a href="<?=Url::to(['/message/detail', 'toId' => ($user['id'] == $v['suid']) ? $v['to_suid'] : $v['suid']])?>" class="weui-media-box weui-media-box_appmsg">
             <div class="weui-media-box__hd">
                 <img class="weui-media-box__thumb" src="<?=Yii::$app->params['imgUrl'].$v['avatar']?>" alt="">
-                <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">8</span>
+                <?php if($v['isnew']){ ?><span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;"></span><?php } ?>
             </div>
             <div class="weui-media-box__bd">
                 <h4 class="weui-media-box__title">

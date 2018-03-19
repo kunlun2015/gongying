@@ -69,10 +69,10 @@
     <?php } ?>
 </ul>
 <div class="weui-loadmore weui-loadmore_line" data-page="1" data-total="<?=$purchaseTotalPage?>">    
-  <span class="weui-loadmore__tips"><?php if($purchaseTotalPage < 1){ ?>暂无数据<?php }else{ ?>上滑加载更多<?php } ?></span>
+  <span class="weui-loadmore__tips"><?php if($purchaseTotalPage < 1){ ?>暂无数据<?php }elseif($purchaseTotalPage == 1){?>已加载全部<?php }else{ ?>上滑加载更多<?php } ?></span>
 </div>
 <div class="weui-loadmore weui-loadmore_line none" data-page="1" data-total="<?=$supplyTotalPage?>">
-  <span class="weui-loadmore__tips"><?php if($supplyTotalPage < 1){ ?>暂无数据<?php }else{ ?>上滑加载更多<?php } ?></span>
+  <span class="weui-loadmore__tips"><?php if($supplyTotalPage < 1){ ?>暂无数据<?php }elseif($supplyTotalPage == 1){?>已加载全部<?php }else{ ?>上滑加载更多<?php } ?></span>
 </div>
 <?php $this->beginBlock("pageJs") ?>
     $(document).ready(function(){

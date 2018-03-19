@@ -26,6 +26,7 @@ $(function(){
                     $("input[name='rid']").val(res.data.rid);
                     var html = '<div class="message me"><div class="avatar"><img src="'+$("input[name='avatar']").val()+'" alt=""></div><div class="content"><p class="author-name">'+$("input[name='username']").val()+'</p><div class="message-text-wrap"><div class="message-text">'+res.data.message+'</div></div></div></div>';
                     $('.chat').append(html);
+                    $('.message-input').val('');
                 }else{
 
                 }

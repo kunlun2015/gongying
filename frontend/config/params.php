@@ -1,4 +1,4 @@
 <?php
 return [
-    'staticUrl' => 'http://local.gongying.com/static'
+    'staticUrl' => 'http://static.gongying.debugphp.com/'
 ];

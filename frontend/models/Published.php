@@ -67,12 +67,14 @@ class Published extends CommonModel
      * @param  int $type  1求购，2供应
      * @param  string $keywords   搜索关键字
      * @param  int $fid        一级分类id
+     * @param  int $sid        二级分类id
+     * @param  int $tid        三级分类id
      * @param  int $page       页码
      * @param  int $pageSize   页面记录条数
      * @param  int &$totalPage 总页数
      * @return array
      */
-    public function dataList($type, $keywords, $fid, $page, $pageSize, &$totalPage)
+    public function dataList($type, $keywords, $fid, $sid, $tid, $page, $pageSize, &$totalPage)
     {
         $offset = ($page - 1)*$pageSize;
         $sql = 'select id, fid, sid, tid, title, num, delivery_area, pictures from {{%published}} where 1 = 1';
@@ -84,6 +86,14 @@ class Published extends CommonModel
         if($fid){
             $sql .= ' and fid = '.$fid; 
             $sqlTotal .= ' and fid = '.$fid; 
+        }
+        if($sid){
+            $sql .= ' and sid = '.$sid; 
+            $sqlTotal .= ' and sid = '.$sid; 
+        }
+        if($tid){
+            $sql .= ' and tid = '.$tid; 
+            $sqlTotal .= ' and tid = '.$tid; 
         }
         if($keywords){
             $sql .= " and title like '%$keywords%'";

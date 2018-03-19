@@ -8,6 +8,7 @@
 
 .wrap{padding: 10px 15px;}
 .mb-55{margin-bottom: 55px !important;}
+.mt-50{margin-top: 50px;}
 
 .slide-wrap{position: relative;overflow: hidden;}
 .swiper-slide img{width: 100%;}
@@ -100,3 +101,6 @@
 .message.me .message-text-wrap:before{right: -5px;transform: rotate(-45deg);left: auto;}
 
 .send-input{position: fixed !important;bottom: 0;width: 100%;background-color: #fff;box-sizing: border-box;}
+
+.weui-media-box__hd .weui-badge{width: 15px;height: 15px;border-radius: 15px;padding: 0;}
+.message-spot{display: inline-block;width: 10px;height: 10px;border-radius: 10px;background-color: #f43530;position: absolute;margin: 5px 0 0 6px;}
