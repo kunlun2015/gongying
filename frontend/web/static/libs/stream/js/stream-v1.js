@@ -1323,7 +1323,7 @@
 		disable : function() {
 			this.fileProvider.set("enabled", !1), this.fileProvider.triggerEnabled(), fAddClass(this.startPanel.children[0], "stream-disable-browser"), fAddClass(this.startPanel, "disabled");
 		},
-		enable : function() {
+		enable : function() {			
 			this.fileProvider.set("enabled", !0), this.fileProvider.triggerEnabled(), fRemoveClass(this.startPanel.children[0], "stream-disable-browser"), fRemoveClass(this.startPanel, "disabled");
 		},
 		stop : function() {

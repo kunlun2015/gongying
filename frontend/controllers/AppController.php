@@ -50,7 +50,9 @@ class AppController extends Controller {
             'id' => 1,
             'openid' => 'sdfgfg',
             'username' => 'Amos',
-            'avatar' => 'avatar/2018/03/3J9na83TIzrE20180316101442.jpeg'
+            'avatar' => 'avatar/2018/03/3J9na83TIzrE20180316101442.jpeg',
+            'mobile' => 'erftg',
+            'company' => 'sdrg'
         ]);
         if(!$this->session->get('user')){
             $wxUserInfo = (new Wx)->userInfo();

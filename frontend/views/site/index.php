@@ -54,11 +54,11 @@
     <li>
         <div class="list-t">
             <div class="thumb">
-                <img src="<?=Yii::$app->params['imgUrl'].$v['pictures'][0]?>.thumb.jpg" alt="<?=$v['title']?>">
+                <a href="<?=Url::to(['/detail', 'id' => $v['id']])?>"><img src="<?=Yii::$app->params['imgUrl'].$v['pictures'][0]?>.thumb.jpg" alt="<?=$v['title']?>"></a>
             </div>            
             <div class="list-info">
                 <span class="price"><a href="<?=Url::to(['/detail', 'id' => $v['id']])?>">议价</a></span>
-                <p class="title"><?=$v['title']?></p>
+                <p class="title"><a href="<?=Url::to(['/detail', 'id' => $v['id']])?>"><?=$v['title']?></a></p>
                 <p class="num">数量：<?=$v['num']?></p>
                 <p class="area">交付地区：<?=$v['delivery_area']?></p>
             </div>
@@ -79,11 +79,11 @@
     <li>
         <div class="list-t">
             <div class="thumb">
-                <img src="<?=Yii::$app->params['imgUrl'].$v['pictures'][0]?>" alt="">
+                <a href="<?=Url::to(['/detail', 'id' => $v['id']])?>"><img src="<?=Yii::$app->params['imgUrl'].$v['pictures'][0]?>.thumb.jpg" alt="<?=$v['title']?>"></a>
             </div>            
             <div class="list-info">
                 <span class="price"><a href="<?=Url::to(['/detail', 'id' => $v['id']])?>">议价</a></span>
-                <p class="title"><?=$v['title']?></p>
+                <p class="title"><a href="<?=Url::to(['/detail', 'id' => $v['id']])?>"><?=$v['title']?></a></p>
                 <p class="num">服务商：<?=$v['num']?></p>
                 <p class="area">所在地区：<?=$v['delivery_area']?></p>
             </div>

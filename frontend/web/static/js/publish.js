@@ -4,6 +4,7 @@
  * @date    2018-03-04 11:59:33
  * @version 1.0
  */
+var _t;
 $(document).ready(function(){
     $("#city-picker").cityPicker({
         title: "请选择收货地址"
@@ -113,10 +114,10 @@ $(document).ready(function(){
     var config = {
         enabled: true,
         customered: true,
-        multipleFiles: true,
+        multipleFiles: false,
         autoRemoveCompleted: false,
         autoUploading: true,
-        fileFieldName: "FileData",
+        fileFieldName: "fileData",
         maxSize: 1024*1024*10,
         simLimit: uploadNum,
         extFilters: [],
@@ -125,7 +126,9 @@ $(document).ready(function(){
         uploadURL : "/upload/picture",
         tokenURL: '/upload/token',
         retryCount: 1,
-        onSelect: function(files) {},
+        onSelect: function(files) {
+            _t.disable();
+        },
         onMaxSizeExceed: function(file) {
             console.log('文件过大')
         },
@@ -134,10 +137,11 @@ $(document).ready(function(){
         },
         onAddTask: function(file) {
             var str = '<li class="weui-uploader__file weui-uploader__file_status" style="background-image:url(./static/images/pic_160.png)"><div class="weui-uploader__file-content">0%</div><input type="hidden" name="pictures[]" /></li>';
-            $('#uploaderFiles').append(str);  
+            $('#uploaderFiles').append(str);
         },
-        onUploadProgress: function(file) {
+        onUploadProgress: function(file) {            
             $('.weui-uploader__file_status .weui-uploader__file-content').text(file.percent + "%");
+            
         },
         onStop: function() {},
         onCancel: function(file) {},
@@ -145,9 +149,10 @@ $(document).ready(function(){
         onComplete: function(file) {
             $('.weui-uploader__file_status .weui-uploader__file-content').text("100%");
             $('.weui-uploader__file_status').css({'background-image': 'url("'+JSON.parse(file.msg).url+'")'})
-             $('.weui-uploader__file_status input').val(JSON.parse(file.msg).path);
+            $('.weui-uploader__file_status input').val(JSON.parse(file.msg).path);
             $('.weui-uploader__file_status').removeClass('weui-uploader__file_status');
             $('.weui-uploader__info').text($('.weui-uploader__file').length+'/'+uploadNum);
+            _t.enable();      
         },
         onFileCountExceed: function(){
             console.log('文件数量超过限制');
@@ -156,9 +161,14 @@ $(document).ready(function(){
             return true;
         },
         onQueueComplete: function(msg) {},
-        onUploadError: function(status, msg) {}
+        onUploadError: function(status, msg) {
+            $.alert("上传出错，请稍后重试", function(){
+                $('.weui-uploader__file_status').remove();
+                _t.enable();
+            });            
+        }
     };
-    var _t = new Stream(config);
+    _t = new Stream(config);
 
     var clickedUploadPicture;
     //查看上传图片

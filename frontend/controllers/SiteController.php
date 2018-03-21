@@ -22,9 +22,4 @@ class SiteController extends AppController {
         $data['supplyList'] = $published->indexList(2, 10);
         return $this->render('index', $data);
     }
-
-    public function actionTest()
-    {
-        echo 'test';
-    }
 }

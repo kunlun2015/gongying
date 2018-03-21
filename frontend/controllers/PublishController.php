@@ -32,6 +32,17 @@ class PublishController extends AppController {
             return $this->app->runAction('publish/type');
         }
         $data['type'] = $type === 'purchase' ? 1 : 2;
+        //如果发布产品需要完善个人信息
+        if($data['type'] == 2 && (!$this->user['mobile'] || !$this->user['company'])){
+            return $this->tipsPage([
+                'title' => '', 
+                'msg' => '发布产品需要完善个人信息,正在跳转完善个人信息，请稍后……', 
+                'icon' => 'weui-icon-info',
+                'redirect' => true,
+                'autoRedirect' => true,
+                'redirectUrl' => Url::to(['/my/edit-profile', 'backUrl' => Url::to(['/publish', 'type' => 'supply'])])
+            ]);
+        }
         $classify = new Classify;
         $data['classify'] = $classify->classifyList();
         return $this->render('index', $data);
@@ -78,7 +89,7 @@ class PublishController extends AppController {
             ];
         }elseif($type === 2){
             $data = [
-                'suid' => 1,
+                'suid' => $this->user['id'],
                 'type' => $type,
                 'title' => $this->request->post('title'),
                 'fid' => $this->request->post('fid'),
@@ -90,15 +101,13 @@ class PublishController extends AppController {
                 'anonymous' => $this->request->post('anonymous') ? $this->request->post('anonymous') : 0
             ];
         }
-        
         //取第一张图片生成封面缩略图
         $pictures = explode(',', $data['pictures']);
         $thumbPath = Yii::$app->params['fileSavePath'].$pictures[0];        
         $editor = Grafika::createEditor();
         $editor->open($thumb, $thumbPath);
         $editor->resizeFill($thumb , 80 , 80);
-        $editor->save($thumb , $thumbPath.'.thumb.jpg');
-        
+        $editor->save($thumb , $thumbPath.'.thumb.jpg');        
         if($publish->save($data)){
             $this->jsonExit(0, '发布成功', ['url' => Url::to(['/'])]);
         }else{
@@ -141,15 +150,13 @@ class PublishController extends AppController {
                 'updated_at' => date('Y-m-d H:i:s')
             ];
         }
-        
         //取第一张图片生成封面缩略图
         $pictures = explode(',', $data['pictures']);
-        $thumbPath = Yii::$app->params['fileSavePath'].$pictures[0];        
+        $thumbPath = Yii::$app->params['fileSavePath'].$pictures[0];    
         $editor = Grafika::createEditor();
         $editor->open($thumb, $thumbPath);
         $editor->resizeFill($thumb , 80 , 80);
         $editor->save($thumb , $thumbPath.'.thumb.jpg');
-
         if($publish->update($id, $data)){
             $this->jsonExit(0, '编辑成功', ['url' => Url::to(['/my/published'])]);
         }else{

@@ -47,7 +47,10 @@ class MessageController extends AppController {
         $page = 1;
         $pageSize = 10;
         $data['message'] = [];
-        $data['rid'] && $data['message'] = $message->messageDetail($data['rid'], $page, $pageSize, $totalPage);
+        if($data['rid']){
+            $data['message'] = $message->messageDetail($data['rid'], $page, $pageSize, $totalPage);
+            $message->markMessageReaded($data['rid'], $this->user['id']);
+        }        
         return $this->render('detail', $data);
     }
 

@@ -10,6 +10,7 @@ namespace frontend\controllers;
 
 use Yii;
 use yii\web\Controller;
+use Grafika\Grafika;
 
 class UploadController extends AppController {
     
@@ -48,6 +49,15 @@ class UploadController extends AppController {
                 }
             }
         }
+        //裁剪图片为宽度不超过750px
+        if(file_exists(Yii::$app->params['fileSavePath'].'/'.$fileInfo['filePath'])){
+            $editor = Grafika::createEditor();        
+            $editor->open($thumb, Yii::$app->params['fileSavePath'].'/'.$fileInfo['filePath']);
+            if($thumb->getWidth() >= 750){
+                $editor->resizeExactWidth($thumb , 750);
+                $editor->save($thumb , Yii::$app->params['fileSavePath'].'/'.$fileInfo['filePath']);
+            }
+        }        
         exit(json_encode(['up_size' => true, 'start' => $fileInfo['up_size'], 'path' => $fileInfo['filePath'], 'url' => Yii::$app->params['imgUrl'].$fileInfo['filePath']]));
         
     }

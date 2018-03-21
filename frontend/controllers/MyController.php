@@ -11,6 +11,7 @@ namespace frontend\controllers;
 use Yii;
 use yii\web\Controller;
 use frontend\models\My;
+use frontend\models\User;
 
 class MyController extends AppController {
 
@@ -94,12 +95,15 @@ class MyController extends AppController {
                 'position' => $this->request->post('position')
             ];
             if($this->my->update($this->user['id'], $data)){
+                $userInfo = (new User)->detailByOpenId($this->user['openid']);
+                $this->session->set('user', $userInfo);
                 $this->jsonExit(0, '资料更新成功', ['url' => '/my/profile']);
             }else{
                 $this->jsonExit(-1, '资料更新失败');
             }
         }
         $data['user'] = $this->my->getEditInfo($this->user['id']);
+        $data['backUrl'] = $this->request->get('backUrl');
         return $this->render('editProfile', $data);
     }
 

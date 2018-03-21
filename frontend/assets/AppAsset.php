@@ -13,7 +13,7 @@ class AppAsset extends AssetBundle{
     public $baseUrl = 'http://local.gongying.com/static/';
     public $css = [
         'css/common.css',
-        'css/style.css',
+        'css/style.css?v=20180320',
         'libs/font-awesome/css/font-awesome.min.css',
         'https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css',
         'libs/weui/css/jquery-weui.min.css'

@@ -36,10 +36,11 @@
         </div>
     </div>
 </div>
-<a href="javascript:;" class="weui-btn weui-btn_primary mt-50 save-btn">保存</a>
+<a href="javascript:;" class="weui-btn weui-btn_primary mt-50 save-btn" style="width: 90%;">保存</a>
 </form>
 <?php $this->beginBlock("pageJs") ?>
-    $(document).ready(function(){        
+    $(document).ready(function(){
+        var backUrl = '<?=$backUrl?>';     
         $('.save-btn').click(function(){
             if(!$('input[name="username"]').val()){
                 $.alert("姓名不能为空", function(){
@@ -61,7 +62,7 @@
                 success: function(res){
                     if(res.code === 0){
                         $.toast(res.msg, 1000, function(){
-                            window.location.href = res.data.url;
+                            window.location.href = backUrl ? backUrl : res.data.url;
                         });
                     }else{
                         $.toast(res.msg, 'cancel');

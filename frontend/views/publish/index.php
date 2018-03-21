@@ -9,7 +9,7 @@
     use yii\helpers\Url;
     \frontend\assets\AppAsset::addScript($this, 'libs/weui/js/city-picker.min.js');    
     \frontend\assets\AppAsset::addScript($this, 'libs/stream/js/stream-v1.js');
-    \frontend\assets\AppAsset::addScript($this, 'js/publish.js');
+    \frontend\assets\AppAsset::addScript($this, 'js/publish.js?v=31sdfdf');
 ?>
 <div class="publish-form">
     <form action="">
@@ -24,7 +24,7 @@
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">数量</label></div>
             <div class="weui-cell__bd">
-                <input class="weui-input" name="num" type="number" pattern="[0-9]*" placeholder="请输入数量">
+                <input class="weui-input" name="num" type="number" pattern="[0-9]*" placeholder="请输入数量(数字)">
             </div>
         </div>
         <?php } ?>
@@ -44,13 +44,13 @@
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">预算金额</label></div>
             <div class="weui-cell__bd">
-                <input class="weui-input" name="budget" type="number" pattern="[0-9]*" placeholder="您的预算金额">
+                <input class="weui-input" name="budget" type="number" pattern="[0-9]*" placeholder="您的预算金额(数字)">
             </div>
         </div>        
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">交付周期</label></div>
             <div class="weui-cell__bd">
-                <input class="weui-input" name="delivery_cycle" type="text" placeholder="物资交付周期">
+                <input class="weui-input" name="delivery_cycle" type="number" placeholder="物资交付周期(数字,单位：天)">
             </div>
         </div>
         <div class="weui-cell">
@@ -87,7 +87,7 @@
                     <div class="weui-uploader__bd">
                         <ul class="weui-uploader__files" id="uploaderFiles"></ul>
                         <div class="weui-uploader__input-box">
-                            <div id="uploaderInput" class="weui-uploader__input" ></div>
+                            <div id="uploaderInput" class="weui-uploader__input"><span></span></div>
                         </div>
                     </div>
                 </div>

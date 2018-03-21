@@ -45,7 +45,7 @@
     <li>
         <div class="list-t">
             <div class="thumb">
-                <img src="<?=Yii::$app->params['imgUrl'].$v['pictures'][0]?>" alt="">
+                <img src="<?=Yii::$app->params['imgUrl'].$v['pictures'][0]?>.thumb.jpg" alt="">
             </div>            
             <div class="list-info">
                 <span class="price action-btn">

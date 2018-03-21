@@ -104,3 +104,5 @@
 
 .weui-media-box__hd .weui-badge{width: 15px;height: 15px;border-radius: 15px;padding: 0;}
 .message-spot{display: inline-block;width: 10px;height: 10px;border-radius: 10px;background-color: #f43530;position: absolute;margin: 5px 0 0 6px;}
+
+.weui-form-preview__hd .weui-form-preview__value{font-size: 14px !important;}

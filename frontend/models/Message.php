@@ -140,4 +140,15 @@ class Message extends CommonModel
         return $newMessage ? true : false;
     }
 
+    /**
+     * 标记消息为已读
+     * @param  int $roomId 聊天室id
+     * @param  int $suid   用户suid
+     * @return boolen
+     */
+    public function markMessageReaded($roomId, $suid)
+    {
+        return $this->db->createCommand()->update('{{%message_users}}', ['isnew' => 0], ['rid' => $roomId, 'suid' => $suid])->execute();
+    }
+
 }
