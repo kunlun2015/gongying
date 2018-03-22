@@ -25,7 +25,7 @@ class My extends CommonModel
     public function published($suid, $type, $page, $pageSize, &$totalPage)
     {
         $offset = ($page - 1)*$pageSize;
-        $sql = 'select id, fid, sid, tid, title, num, delivery_area, pictures from {{%published}} where suid = '.$suid;
+        $sql = 'select id, suid, fid, sid, tid, title, num, delivery_area, pictures from {{%published}} where suid = '.$suid;
         $sqlTotal = 'select count(*) from {{%published}} where 1 = 1';
         if($type && in_array($type, [1, 2])){
             $sql .= ' and type = '.$type;
@@ -40,6 +40,9 @@ class My extends CommonModel
             $list[$k]['fname'] = $classify->classifyById($v['fid'])['name'];
             $list[$k]['sname'] = $classify->classifyById($v['sid'])['name'];
             $list[$k]['tname'] = $classify->classifyById($v['tid'])['name'];
+            if($type == 2){
+                $list[$k]['provider'] = (new Published)->getProviderBySuid($v['suid']);
+            }
         }
         return $list;
     }
@@ -68,13 +71,16 @@ class My extends CommonModel
     public function collected($suid, $type, $page, $pageSize, &$totalPage)
     {
         $offset = ($page - 1)*$pageSize;
-        $list = $this->db->createCommand('select t1.id, fid, sid, tid, title, num, delivery_area, pictures from {{%collection}} as t1 left join {{%published}} as t2 on t1.pid = t2.id where t1.suid = :suid and t2.type = :type order by id desc limit :offset, :pageSize', ['suid' => $suid, 'type' => $type, 'offset' => $offset, 'pageSize' => $pageSize])->queryAll();
+        $list = $this->db->createCommand('select t1.id, t2.suid, fid, sid, tid, title, num, delivery_area, pictures from {{%collection}} as t1 left join {{%published}} as t2 on t1.pid = t2.id where t1.suid = :suid and t2.type = :type order by id desc limit :offset, :pageSize', ['suid' => $suid, 'type' => $type, 'offset' => $offset, 'pageSize' => $pageSize])->queryAll();
         $classify = new Classify;
         foreach ($list as $k => $v) {
             $list[$k]['pictures'] = explode(',', $v['pictures']);
             $list[$k]['fname'] = $classify->classifyById($v['fid'])['name'];
             $list[$k]['sname'] = $classify->classifyById($v['sid'])['name'];
             $list[$k]['tname'] = $classify->classifyById($v['tid'])['name'];
+            if($type == 2){
+                $list[$k]['provider'] = (new Published)->getProviderBySuid($v['suid']);
+            }
         }
         $sqlTotal = 'select count(*) from {{%collection}} as t1 left join {{%published}} as t2 on t1. pid = t2.id where t1.suid = '.$suid .' and type = '.$type;
         $totalPage = $this->getTotalPage($sqlTotal, $pageSize);

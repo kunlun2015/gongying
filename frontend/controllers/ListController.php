@@ -16,6 +16,7 @@ class ListController extends AppController {
 
     private $published;
     private $pageSize = 10;
+    public $enableCsrfValidation = false;
 
     public function init()
     {

@@ -53,7 +53,7 @@
                     <a href="javascript:;" class="delete" data-id="<?=$v['id']?>">删除</a>
                 </span>
                 <p class="title"><?=$v['title']?></p>
-                <p class="num">服务商：<?=$v['num']?></p>
+                <p class="num">服务商：<?=$v['provider']?></p>
                 <p class="area">所在地区：<?=$v['delivery_area']?></p>
             </div>
         </div>

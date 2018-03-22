@@ -16,6 +16,7 @@ use frontend\models\Message;
 class MessageController extends AppController {
 
     private $user;
+    public $enableCsrfValidation = false;
 
     public function init()
     {

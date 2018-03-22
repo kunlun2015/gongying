@@ -59,7 +59,7 @@
                 url: '/my/save-avatar',
                 dataType: 'json',
                 type: 'post',
-                data: {base64: dataurl},
+                data: {'<?= \Yii::$app->request->csrfParam; ?>': '<?= \Yii::$app->request->getCsrfToken();?>',base64: dataurl},
                 success: function(res){
                     if(res.code === 0){
                         $.toast(res.msg, 1000, function(){

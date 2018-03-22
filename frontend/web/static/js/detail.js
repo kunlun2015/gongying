@@ -9,11 +9,13 @@ $(document).ready(function(){
 
     $('.btn-collect').click(function(){
         var _this = $(this);
+        var data = {pid: $("input[name=publishedId]").val()};
+        data[$('#csrf').attr('name')] = $('#csrf').val();
         tools.ajax({
             url: '/detail/collect',
             dataType: 'json',
             type: 'post',
-            data: {pid: $("input[name=publishedId]").val()},
+            data: data,
             success: function(res){
                 if(res.code === 0){
                     $.toast(res.msg, 1000, function(){

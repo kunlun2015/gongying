@@ -25,7 +25,7 @@ class AppController extends Controller {
         $this->app->language = 'zh_CN';
         $this->request = $this->app->request;
         $this->session = $this->app->session;
-        
+        $this->loginControl();        
     }
 
     //异常提示处理
@@ -44,17 +44,24 @@ class AppController extends Controller {
      */
     public function beforeAction($action)
     {
-        $this->log = new Log; 
-        $user = new User;       
-        $this->session->set('user', [
+        $this->log = new Log;
+        $this->loginControl();
+        return parent::beforeAction($action);
+    }
+
+    //未登录则微信授权登陆并存储session
+    private function loginControl()
+    {
+        /*$this->session->set('user', [
             'id' => 1,
             'openid' => 'sdfgfg',
             'username' => 'Amos',
             'avatar' => 'avatar/2018/03/3J9na83TIzrE20180316101442.jpeg',
             'mobile' => 'erftg',
             'company' => 'sdrg'
-        ]);
+        ]);*/
         if(!$this->session->get('user')){
+            $user = new User;
             $wxUserInfo = (new Wx)->userInfo();
             $userInfo = $user->detailByOpenId($wxUserInfo['openid']);
             if(!$userInfo){
@@ -70,7 +77,6 @@ class AppController extends Controller {
                 $this->session->set('user', $userInfo);
             }
         }
-        return true;
     }
 
     //json数据返回

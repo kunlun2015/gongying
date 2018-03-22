@@ -84,7 +84,7 @@
             <div class="list-info">
                 <span class="price"><a href="<?=Url::to(['/detail', 'id' => $v['id']])?>">议价</a></span>
                 <p class="title"><a href="<?=Url::to(['/detail', 'id' => $v['id']])?>"><?=$v['title']?></a></p>
-                <p class="num">服务商：<?=$v['num']?></p>
+                <p class="num">服务商：<?=$v['provider']?></p>
                 <p class="area">所在地区：<?=$v['delivery_area']?></p>
             </div>
         </div>

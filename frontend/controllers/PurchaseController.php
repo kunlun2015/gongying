@@ -15,6 +15,7 @@ use frontend\models\Published;
 class PurchaseController extends AppController {
 
     private $pageSize = 10;
+    public $enableCsrfValidation = false;
     
     public function actionIndex()
     {

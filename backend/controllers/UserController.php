@@ -35,7 +35,40 @@ class UserController extends AdminController
 
     public function actionEdit()
     {
-        $suid = (int)$this->request->get($suid);
-        
+        $suid = (int)$this->request->get('suid');
+        $data['user'] = $this->user->getEditInfo($suid);
+        return $this->render('edit', $data);
+    }
+
+    public function actionShow()
+    {
+        $suid = (int)$this->request->get('suid');
+        $data['user'] = $this->user->userDetail($suid);
+        return $this->render('show', $data);
+    }
+
+    public function actionSave()
+    {
+        if(!$this->request->isAjax || !$this->request->isPost){
+            exit('不支持的访问');
+        }
+        $act = $this->request->post('act');
+        switch ($act) {
+            case 'update':
+                $suid = (int)$this->request->post('suid');
+                $data = [
+                    'status' => (int)$this->request->post('status')  
+                ];
+                if($this->user->save($suid, $data)){
+                    $this->jsonExit(0, '信息更新成功', ['url' => Url::to(['/user'])]);
+                }else{
+                    $this->jsonExit(-1, '信息没有被更新或者更新失败');
+                }
+                break;
+            
+            default:
+                # code...
+                break;
+        }
     }
 }

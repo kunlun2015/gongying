@@ -44,6 +44,16 @@ class User extends CommonModel{
     }
 
     /**
+     * 查询用户详细信息
+     * @param  int $suid 用户uid
+     * @return array
+     */
+    public function userDetail($suid)
+    {
+        return $this->db->createCommand('select id, openid, username, mobile, company, position, avatar, status, created_at from {{%site_users}} where id = :suid', ['suid' => $suid])->queryOne();
+    }
+
+    /**
      * 保存用户信息
      * @param  int $suid 用户uid
      * @param  array $data 更新数据

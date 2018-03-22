@@ -103,6 +103,7 @@
         </div>
     </div>
     <input type="hidden" name="type" value="<?=$type?>">
+    <input type="hidden" id="csrf" name="<?= \Yii::$app->request->csrfParam; ?>" value="<?= \Yii::$app->request->getCsrfToken();?>">
     <a href="javascript:;" class="weui-btn weui-btn_primary save-btn">保存</a>
     </form>
 </div>

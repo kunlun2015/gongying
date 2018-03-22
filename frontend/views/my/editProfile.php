@@ -35,6 +35,7 @@
             <input class="weui-input" name="position" value="<?=$user['position']?>" type="text" placeholder="您的职位">
         </div>
     </div>
+    <input type="hidden" id="csrf" name="<?= \Yii::$app->request->csrfParam; ?>" value="<?= \Yii::$app->request->getCsrfToken();?>">
 </div>
 <a href="javascript:;" class="weui-btn weui-btn_primary mt-50 save-btn" style="width: 90%;">保存</a>
 </form>

@@ -51,13 +51,16 @@ class Published extends CommonModel
      */
     public function indexList($type, $pageSize)
     {
-        $list = $this->db->createCommand('select id, fid, sid, tid, title, num, delivery_area, pictures from {{%published}} where type = :type order by updated_at desc limit :pageSize', ['type' => $type, 'pageSize' => $pageSize])->queryAll();
+        $list = $this->db->createCommand('select id, suid, fid, sid, tid, title, num, delivery_area, pictures from {{%published}} where type = :type order by updated_at desc limit :pageSize', ['type' => $type, 'pageSize' => $pageSize])->queryAll();
         $classify = new Classify;
         foreach ($list as $k => $v) {
             $list[$k]['pictures'] = explode(',', $v['pictures']);
             $list[$k]['fname'] = $classify->classifyById($v['fid'])['name'];
             $list[$k]['sname'] = $classify->classifyById($v['sid'])['name'];
             $list[$k]['tname'] = $classify->classifyById($v['tid'])['name'];
+            if($type == 2){
+                $list[$k]['provider'] = $this->getProviderBySuid($v['suid']);
+            }
         }
         return $list;
     }
@@ -77,7 +80,7 @@ class Published extends CommonModel
     public function dataList($type, $keywords, $fid, $sid, $tid, $page, $pageSize, &$totalPage)
     {
         $offset = ($page - 1)*$pageSize;
-        $sql = 'select id, fid, sid, tid, title, num, delivery_area, pictures from {{%published}} where 1 = 1';
+        $sql = 'select id, suid, fid, sid, tid, title, num, delivery_area, pictures from {{%published}} where 1 = 1';
         $sqlTotal = 'select count(*) from {{%published}} where 1 = 1';
         if($type && in_array($type, [1, 2])){
             $sql .= ' and type = '.$type;
@@ -108,6 +111,9 @@ class Published extends CommonModel
             $list[$k]['fname'] = $classify->classifyById($v['fid'])['name'];
             $list[$k]['sname'] = $classify->classifyById($v['sid'])['name'];
             $list[$k]['tname'] = $classify->classifyById($v['tid'])['name'];
+            if($type == 2){
+                $list[$k]['provider'] = $this->getProviderBySuid($v['suid']);
+            }
         }
         return $list;
     }
@@ -129,6 +135,17 @@ class Published extends CommonModel
         $detail['sname'] = $classify->classifyById($detail['sid'])['name'];
         $detail['tname'] = $classify->classifyById($detail['tid'])['name'];
         return $detail;
+    }
+
+    /**
+     * 查询用户所在公司
+     * @param  int $suid 用户uid
+     * @return fieldValue
+     */
+    public function getProviderBySuid($suid)
+    {
+        $company = $this->db->createCommand('select company from {{%site_users}} where id = :suid', ['suid' => $suid])->queryColumn();
+        return $company ? $company[0] : '';
     }
 
     /**

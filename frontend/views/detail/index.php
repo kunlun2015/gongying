@@ -54,6 +54,7 @@
     </div>
 </div>
 <input type="hidden" name="publishedId" value="<?=$detail['id']?>">
+<input type="hidden" id="csrf" name="<?= \Yii::$app->request->csrfParam; ?>" value="<?= \Yii::$app->request->getCsrfToken();?>">
 <div class="detail-bottom">
     <div class="btn-group-small">
         <a href="javascript:;" class="btn btn-share">

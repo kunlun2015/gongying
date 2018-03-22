@@ -17,7 +17,7 @@ use yii\helpers\Url;
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <a href="<?php echo Url::to(['/tags']); ?>">用户管理</a>
+            <a href="<?php echo Url::to(['/user']); ?>">用户管理</a>
             <i class="fa fa-angle-right"></i>
         </li>        
     </ul>
@@ -73,8 +73,8 @@ use yii\helpers\Url;
                             </td>
                             <td><?=$v['created_at']?></td>
                             <td>
-                                <a class="edit" href="javascript:;"> 编辑 </a>&nbsp;
-                                <a class="edit" href="javascript:;"> 查看 </a>
+                                <a class="edit" href="<?=Url::to(['/user/edit', 'suid' => $v['id']])?>"> 编辑 </a>&nbsp;
+                                <a class="edit" href="<?=Url::to(['/user/show', 'suid' => $v['id']])?>"> 查看 </a>
                             </td>
                         </tr>
                         <?php } ?>
@@ -85,7 +85,7 @@ use yii\helpers\Url;
     </div>
 </div>
 <div class="row kl-pagination"><?=$pagination?></div>
-<input disabled="disabled" type="hidden" name="request_url" value="<?php echo Url::to(['category/save']); ?>">
+<input disabled="disabled" type="hidden" name="request_url" value="<?php echo Url::to(['/user/save']); ?>">
 <?php 
     $this->registerJs('
             $("#list-table").dataTable({
@@ -97,7 +97,7 @@ use yii\helpers\Url;
                 },
                 columnDefs: [{
                     orderable: !1,
-                    targets: [0, 6]
+                    targets: [6]
                 }],
                 order: []
             });
@@ -105,4 +105,3 @@ use yii\helpers\Url;
 ?>
 <?php \backend\assets\AppAsset::addScript($this, 'static/global/scripts/datatable.js'); ?>
 <?php \backend\assets\AppAsset::addScript($this, 'static/global/plugins/datatables/jquery.dataTables.min.js'); ?>
-<?php \backend\assets\AppAsset::addScript($this, 'static/js/tags.js'); ?>

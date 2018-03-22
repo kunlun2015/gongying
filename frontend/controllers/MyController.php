@@ -17,6 +17,7 @@ class MyController extends AppController {
 
     private $user;
     private $my;
+    public $enableCsrfValidation = false;
 
     public function init()
     {

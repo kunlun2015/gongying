@@ -13,6 +13,8 @@ use yii\web\Controller;
 use Grafika\Grafika;
 
 class UploadController extends AppController {
+
+    public $enableCsrfValidation = false;
     
     public function actionToken()
     {
