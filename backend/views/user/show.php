@@ -95,7 +95,7 @@
                                         <!--end row-->                                        
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row" style="display: none;">
                                     <div class="tabbable-line tabbable-custom-profile">
                                         <ul class="nav nav-tabs">
                                             <li class="active">
