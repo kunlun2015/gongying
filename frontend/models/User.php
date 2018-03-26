@@ -38,4 +38,15 @@ class User extends CommonModel
         return $this->db->createCommand('select id, openid, username, avatar from {{%site_users}} where id = :suid', ['suid' => $suid])->queryOne();
     }
 
+    /**
+     * 更新用户信息
+     * @param  int $suid 用户id
+     * @param  array $data 更新数据
+     * @return boolen
+     */
+    public function update($suid, $data)
+    {
+        return $this->db->createCommand()->update('{{%site_users}}', $data, ['id' => $suid])->execute();
+    }
+
 }

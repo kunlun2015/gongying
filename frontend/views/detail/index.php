@@ -8,6 +8,7 @@
     $this->title = '详情页';
     use yii\helpers\Url;
     \frontend\assets\AppAsset::addScript($this, 'js/detail.js');
+    \frontend\assets\AppAsset::addScript($this, 'http://res.wx.qq.com/open/js/jweixin-1.2.0.js');
 ?>
 <style>    
     .weui-form-preview__value{text-align: left;font-size: 18px !important;}
@@ -69,3 +70,35 @@
         <a href="<?=Url::to(['/message/detail', 'toId' => $detail['suid']])?>" class="btn">发消息</a>
     </div>
 </div>
+<?php $this->beginBlock("pageJs") ?>
+    $(document).ready(function(){
+        wx.config({
+            debug: false,
+            appId: '<?=$singPackage['appId']?>',
+            timestamp: <?=$singPackage['timestamp']?>,
+            nonceStr: '<?=$singPackage['nonceStr']?>',
+            signature: '<?=$singPackage['signature']?>',
+            jsApiList: ['onMenuShareAppMessage']
+        });
+        wx.ready(function(){
+            wx.onMenuShareAppMessage({
+                title: '<?=$detail['title']?>',
+                desc: '<?=$detail['description']?>',
+                link: '<?=Yii::$app->request->getHostInfo().Yii::$app->request->url?>',
+                imgUrl: '<?=Yii::$app->params['imgUrl'].$detail['pictures'][0]?>',
+                type: 'link',
+                dataUrl: '',
+                success: function () {},
+                cancel: function () {}
+            });
+        });
+        wx.onMenuShareTimeline({
+            title: '<?=$detail['title']?>',
+            link: '<?=Yii::$app->request->getHostInfo().Yii::$app->request->url?>',
+            imgUrl: '<?=Yii::$app->params['imgUrl'].$detail['pictures'][0]?>',
+            success: function () {},
+            cancel: function () {}
+        });
+    })
+<?php $this->endBlock() ?>
+<?php $this->registerJs($this->blocks["pageJs"], \yii\web\View::POS_END); ?>

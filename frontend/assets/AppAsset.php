@@ -10,7 +10,7 @@ use yii\web\AssetBundle;
 class AppAsset extends AssetBundle{
     public $basePath = '@webroot';
     //public $baseUrl = '@web';
-    public $baseUrl = 'http://local.gongying.com/static/';
+    public $baseUrl = 'http://gongying.debugphp.com/static/';
     public $css = [
         'css/common.css',
         'css/style.css?v=20180320',
@@ -25,12 +25,18 @@ class AppAsset extends AssetBundle{
     ];
 
     //定义按需加载JS方法，注意加载顺序在最后  
-    public static function addScript($view, $jsfile) {  
-        $view->registerJsFile('http://local.gongying.com/static/'.$jsfile, [/*AppAsset::className(), */'depends' => 'frontend\assets\AppAsset']);  
+    public static function addScript($view, $jsfile) {
+        if(strpos($jsfile, 'http://') === false && strpos($jsfile, 'https://') === false && strpos($jsfile, '//') === false){
+            $jsfile = 'http://gongying.debugphp.com/static/'.$jsfile;
+        }
+        $view->registerJsFile($jsfile, [/*AppAsset::className(), */'depends' => 'frontend\assets\AppAsset']); 
     }  
       
    //定义按需加载css方法，注意加载顺序在最后  
     public static function addCss($view, $cssfile) {  
-        $view->registerCssFile('http://local.gongying.com/static/'.$cssfile, [/*AppAsset::className(), */'depends' => 'frontend\assets\AppAsset']);  
+        if(strpos($cssfile, 'http://') === false && strpos($cssfile, 'https://') === false && strpos($cssfile, '//') === false){
+            $cssfile = 'http://gongying.debugphp.com/static/'.$cssfile;
+        }
+        $view->registerCssFile($cssfile, [/*AppAsset::className(), */'depends' => 'frontend\assets\AppAsset']);  
     }  
 }

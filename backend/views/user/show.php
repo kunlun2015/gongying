@@ -59,8 +59,8 @@
                                                 </p>
                                                 <ul class="list-inline">
                                                     <li>注册时间：<?=$user['created_at']?></li>
-                                                    <li>登陆次数：22</li>
-                                                    <li>上次登陆时间：<?=$user['created_at']?></li>
+                                                    <li>登陆次数：<?=$user['login_times']?></li>
+                                                    <li>上次登陆时间：<?=$user['last_login_time']?></li>
                                                 </ul>
                                             </div>
                                             <!--end col-md-8-->

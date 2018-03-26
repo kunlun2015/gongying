@@ -50,7 +50,7 @@ class User extends CommonModel{
      */
     public function userDetail($suid)
     {
-        return $this->db->createCommand('select id, openid, username, mobile, company, position, avatar, status, created_at from {{%site_users}} where id = :suid', ['suid' => $suid])->queryOne();
+        return $this->db->createCommand('select id, openid, username, mobile, company, position, avatar, status, login_times, last_login_time, last_login_ip, created_at from {{%site_users}} where id = :suid', ['suid' => $suid])->queryOne();
     }
 
     /**

@@ -44,14 +44,16 @@ use yii\helpers\Url;
                                 <label for="radio-1">
                                     <span></span>
                                     <span class="check"></span>
-                                    <span class="box"></span> 正常 </label>
+                                    <span class="box"></span> 正常 
+                                </label>
                             </div>
                             <div class="md-radio has-error">
                                 <input type="radio" id="radio-2" name="status" value="2" class="md-radiobtn"<?php if($user['status'] == 2){echo ' checked';} ?>>
-                                <label for="radio-2">
+                                <label for="radio-2" style="color: #e73d4a;">
                                     <span></span>
                                     <span class="check"></span>
-                                    <span class="box"></span> 禁用 </label>
+                                    <span class="box"></span> 禁用
+                                 </label>
                             </div>
                         </div>
                     </div>

@@ -51,7 +51,7 @@ class Published extends CommonModel
      */
     public function indexList($type, $pageSize)
     {
-        $list = $this->db->createCommand('select id, suid, fid, sid, tid, title, num, delivery_area, pictures from {{%published}} where type = :type order by updated_at desc limit :pageSize', ['type' => $type, 'pageSize' => $pageSize])->queryAll();
+        $list = $this->db->createCommand('select id, suid, fid, sid, tid, title, num, delivery_area, pictures from {{%published}} where status = 2 and type = :type order by updated_at desc limit :pageSize', ['type' => $type, 'pageSize' => $pageSize])->queryAll();
         $classify = new Classify;
         foreach ($list as $k => $v) {
             $list[$k]['pictures'] = explode(',', $v['pictures']);
@@ -80,8 +80,8 @@ class Published extends CommonModel
     public function dataList($type, $keywords, $fid, $sid, $tid, $page, $pageSize, &$totalPage)
     {
         $offset = ($page - 1)*$pageSize;
-        $sql = 'select id, suid, fid, sid, tid, title, num, delivery_area, pictures from {{%published}} where 1 = 1';
-        $sqlTotal = 'select count(*) from {{%published}} where 1 = 1';
+        $sql = 'select id, suid, fid, sid, tid, title, num, delivery_area, pictures from {{%published}} where status = 2';
+        $sqlTotal = 'select count(*) from {{%published}} where status = 2';
         if($type && in_array($type, [1, 2])){
             $sql .= ' and type = '.$type;
             $sqlTotal .= ' and type = '.$type;

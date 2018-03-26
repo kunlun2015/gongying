@@ -42,6 +42,16 @@ class MessageController extends AppController {
         if(!$data['toUser']){
             exit('用户不存在');
         }
+        if($toId == $this->user['id']){
+            return $this->tipsPage([
+                'title' => '', 
+                'msg' => '不能与自己对话哦', 
+                'icon' => 'weui-icon-info',
+                'redirect' => true,
+                'autoRedirect' => true,
+                'redirectUrl' => ''
+            ]);
+        }
         $data['user'] = $this->user;
         $message = new Message;
         $data['rid'] = $message->isHasMessaged($this->user['id'], $toId);
@@ -60,7 +70,7 @@ class MessageController extends AppController {
         $time = date('Y-m-d H:i:s');
         $rid = (int)$this->request->post('rid');
         $data = [
-            'message' => $this->request->post('message'),
+            'message' => strip_tags($this->request->post('message')),
             'suid' => $this->user['id'],
             'to_suid' => $this->request->post('tuid'),
             'time' => $time

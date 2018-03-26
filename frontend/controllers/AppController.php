@@ -12,6 +12,7 @@ use yii\web\Controller;
 use common\models\Log;
 use frontend\models\Wx;
 use frontend\models\User;
+use yii\db\Expression;
 
 class AppController extends Controller {
     
@@ -67,13 +68,21 @@ class AppController extends Controller {
             if(!$userInfo){
                 if(!$user->insert([
                     'openid' => $wxUserInfo['openid'],
-                    'username' => $wxUserInfo['nickname']
+                    'username' => $wxUserInfo['nickname'],
+                    'avatar' => 'avatar/2018/03/avatar.jpg',
+                    'last_login_time' => date('Y-m-d H:i:s'),
+                    'last_login_ip' => $this->request->userIP
                 ])){
-                  exit('用户信息存储失败！');  
+                  exit('用户信息存储失败！');
                 }
                 $userInfo = $user->detailByOpenId($wxUserInfo['openid']);
                 $this->session->set('user', $userInfo);
             }else{
+                $user->update($userInfo['id'], [
+                    'login_times' => new Expression('login_times+ 1'),
+                    'last_login_time' => date('Y-m-d H:i:s'),
+                    'last_login_ip' => $this->request->userIP
+                ]);
                 $this->session->set('user', $userInfo);
             }
         }

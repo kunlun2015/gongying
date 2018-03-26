@@ -11,6 +11,7 @@ namespace frontend\controllers;
 use Yii;
 use yii\web\Controller;
 use frontend\models\Published;
+use frontend\models\Wx;
 
 class DetailController extends AppController {
 
@@ -28,6 +29,7 @@ class DetailController extends AppController {
         $suid = $this->session->get('user')['id'];
         $data['detail'] = $this->published->detail($id);
         $data['isCollected'] = $this->published->isCollected($suid, $id);
+        $data['singPackage'] = (new Wx)->getSignPackage();
         return $this->render('index', $data);
     }
 
