@@ -85,7 +85,7 @@ use yii\helpers\Url;
                                     }elseif($v['status'] == 3){
                                         echo '<span class="label label-sm label-danger"> 审核未通过 </span>';
                                     }
-                                ?>                                
+                                ?>
                             </td>
                             <td><?=$v['created_at']?></td>
                             <td>

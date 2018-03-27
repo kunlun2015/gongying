@@ -52,15 +52,16 @@
                                         <div class="row">
                                             <div class="col-md-8 profile-info">
                                                 <h1 class="font-green sbold uppercase"><?=$user['username']?></h1>
-                                                <p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.
-                                                    </p>
-                                                <p>
+                                                <p>个性签名：</p>
+                                                <!-- <p>
                                                     <a href="javascript:;"> www.mywebsite.com </a>
-                                                </p>
+                                                </p> -->
                                                 <ul class="list-inline">
                                                     <li>注册时间：<?=$user['created_at']?></li>
                                                     <li>登陆次数：<?=$user['login_times']?></li>
+
                                                     <li>上次登陆时间：<?=$user['last_login_time']?></li>
+                                                    <li>上次登陆ip：<?=long2ip($user['last_login_ip'])?></li>
                                                 </ul>
                                             </div>
                                             <!--end col-md-8-->
