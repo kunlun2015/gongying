@@ -27,6 +27,7 @@ class Wx extends CommonModel
         $this->curUrl = urlencode($this->app->request->absoluteUrl);
     }
 
+    //授权获取用户信息
     public function userInfo()
     {
         $this->code = $this->app->request->get('code');
@@ -91,7 +92,7 @@ class Wx extends CommonModel
         }
     }
 
-
+    //jssdk签名信息
     public function getSignPackage() {
         $jsapiTicket = $this->jsApiTicket();
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
@@ -128,6 +129,24 @@ class Wx extends CommonModel
             return $response['ticket'];
         }else{
             return $response;
+        }
+    }
+
+    /**
+     * 发送模板消息
+     * 发送成功返回消息id,失败返回false
+     * @return mixed
+     */
+    public function sendTemplateMsg()
+    {
+        $url = 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='.$this->accessToken();
+        $curl = new \linslin\yii2\curl\Curl;
+        $response = $curl->post($url, $data);
+        $response = json_decode($response, true);
+        if($response['errcode'] === 0){
+            return $response['msgid'];
+        }else{
+            return false;
         }
     }
 }
