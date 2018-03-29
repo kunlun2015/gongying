@@ -130,4 +130,23 @@ class CommonModel extends Model {
         }
     }
 
+    /**
+     * 根据ip获取地理位置等信息
+     * @param  string $ip ip地址
+     * @return boolen/string
+     */
+    public function getPlaceInfoByIp($ip)
+    {
+        $url = 'http://ip.taobao.com/service/getIpInfo.php?ip='.$ip;
+        $curl = new \linslin\yii2\curl\Curl;
+        $response = $curl->get($url);
+        $response = json_decode($response, true);
+        if($response['code'] == 0){
+            $data = $response['data'];
+            return $data['country'].$data['region'].$data['city'].$data['county'].$data['isp'];
+        }else{
+            return false;
+        }
+    }
+
 }

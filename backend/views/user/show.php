@@ -61,7 +61,7 @@
                                                     <li>登陆次数：<?=$user['login_times']?></li>
 
                                                     <li>上次登陆时间：<?=$user['last_login_time']?></li>
-                                                    <li>上次登陆ip：<?=long2ip($user['last_login_ip'])?></li>
+                                                    <li>上次登陆ip：<?=long2ip($user['last_login_ip'])?>(<?=$place?>)</li>
                                                 </ul>
                                             </div>
                                             <!--end col-md-8-->

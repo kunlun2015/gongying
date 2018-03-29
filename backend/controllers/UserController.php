@@ -44,6 +44,7 @@ class UserController extends AdminController
     {
         $suid = (int)$this->request->get('suid');
         $data['user'] = $this->user->userDetail($suid);
+        $data['place'] = $this->user->getPlaceInfoByIp(long2ip($data['user']['last_login_ip']));
         return $this->render('show', $data);
     }
 

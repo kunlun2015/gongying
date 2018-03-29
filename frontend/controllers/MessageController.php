@@ -61,6 +61,8 @@ class MessageController extends AppController {
         if($data['rid']){
             $data['message'] = $message->messageDetail($data['rid'], $page, $pageSize, $totalPage);
             $message->markMessageReaded($data['rid'], $this->user['id']);
+            //删除模板消息发送标志，如果已查看则可发送模板消息通知否则在特定的时间内只发送一次
+            $this->app->cache->get($data['rid'].'-'.$this->user['id']) && $this->app->cache->delete($data['rid'].'-'.$this->user['id']);
         }        
         return $this->render('detail', $data);
     }

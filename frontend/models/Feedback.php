@@ -32,6 +32,19 @@ class Feedback extends CommonModel
      */
     public function list($suid, $page, $pageSize, &$totalPage)
     {
-        return $this->db->createCommand('select id, content, reply, replied_at, status, created_at from {{%feedback}} where suid = :suid order by id desc', ['suid' => $suid])->queryAll();
+        $offset = ($page - 1)*$pageSize;
+        $list = $this->db->createCommand('select id, content, reply, replied_at, status, created_at from {{%feedback}} where suid = :suid order by id desc limit :offset, :pageSize', ['suid' => $suid, 'offset' => $offset, 'pageSize' => $pageSize])->queryAll();
+        $totalPage = $this->getTotalPage('select count(*) from {{%feedback}} where suid = '.$suid, $pageSize);
+        return $list;
+    }
+
+    /**
+     * 反馈详情
+     * @param  int $id 反馈详情
+     * @return array
+     */
+    public function detail($id)
+    {
+        return $this->db->createCommand('select content, reply, replied_at, status, created_at from {{%feedback}} where id = :id', ['id' => $id])->queryOne();
     }
 }

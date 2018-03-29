@@ -29,8 +29,23 @@ class FeedbackController extends AppController {
     {
         $page = 1;
         $pageSize = 10;
-        $data['list'] = $this->feedback->list($this->user['id'], $page, $pageSize, $totalPage);
+        $data['list'] = $this->feedback->list($this->user['id'], $page, $pageSize, $data['totalPage']);
         return $this->render('index', $data);
+    }
+
+    public function actionList()
+    {
+        $page = (int)$this->request->get('page') ? (int)$this->request->get('page') : 1;
+        $pageSize = 10;
+        $list = $this->feedback->list($this->user['id'], $page, $pageSize, $totalPage);
+        $this->jsonExit(0, '数据获取成功', ['list' => $list, 'totalPage' => $totalPage]);
+    }
+
+    public function actionShow()
+    {
+        $id = (int)$this->request->get('id');
+        $data['detail'] =  $this->feedback->detail($id);
+        return $this->render('show', $data);
     }
 
     public function actionAdd()

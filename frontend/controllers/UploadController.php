@@ -28,7 +28,7 @@ class UploadController extends AppController {
         if(!is_dir(Yii::$app->params['fileSavePath'].'/'.$savePath)){
             mkdir(Yii::$app->params['fileSavePath'].'/'.$savePath, 0777, true);
         }
-        if($this->app->cache->set($file['token'], $file)){
+        if($this->app->cache->set($file['token'], $file, 300)){
             exit(json_encode(['success' => true, 'token' => $file['token'], 'message' => 'ok']));
         }        
     }
@@ -47,7 +47,7 @@ class UploadController extends AppController {
                 fclose($fp);
                 $fileInfo['up_size'] += strlen($data);
                 if($fileInfo['size'] > $fileInfo['up_size']){
-                    $this->app->cache->set($file['token'], $file);
+                    $this->app->cache->set($file['token'], $file, 300);
                 }
             }
         }

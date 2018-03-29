@@ -63,21 +63,26 @@ class Message extends CommonModel
             ])->execute();
             $transaction->commit();
             //模板消息通知
-            $user = new User;
-            $notifyUser = $user->userUInfoByUid($data['to_suid']);
-            $myInfo = $user->userUInfoByUid($data['suid']);
-            $templateMsgData = [
-                'touser' => $notifyUser['openid'],
-                'template_id' => 'KGNI9no-_UVxYgWJ6VQHkfca8Toi2-_SzTbfEHCQP04',
-                'url' => Url::to(['/message']),
-                'data' => [
-                    'username' => [
-                        'value' => $myInfo['username'],
-                        'color' => '#173177'
+            if(!$this->app->cache->get($rid.'-'.$data['to_suid'])){
+                $user = new User;
+                $notifyUser = $user->userUInfoByUid($data['to_suid']);
+                $myInfo = $user->userUInfoByUid($data['suid']);
+                $templateMsgData = [
+                    'touser' => $notifyUser['openid'],
+                    'template_id' => 'KGNI9no-_UVxYgWJ6VQHkfca8Toi2-_SzTbfEHCQP04',
+                    'url' => Url::to(['/message']),
+                    'data' => [
+                        'username' => [
+                            'value' => $myInfo['username'],
+                            'color' => '#173177'
+                        ]
                     ]
-                ]
-            ];
-            (new Wx)->sendTemplateMsg($templateMsgData);
+                ];
+                $sendRst = (new Wx)->sendTemplateMsg($templateMsgData);
+                if($sendRst != false){
+                    $this->app->cache->set($rid.'-'.$data['to_suid'], time(), 300);
+                }
+            }            
             return $rid;
         } catch (\Exception $e) {
             $transaction->rollBack();

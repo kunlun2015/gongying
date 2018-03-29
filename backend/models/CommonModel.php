@@ -17,6 +17,7 @@ class CommonModel extends \common\models\CommonModel{
     protected $params;
 
     public function init(){
+        parent::init();
         $this->db = Yii::$app->db;
         $this->session = Yii::$app->session;
         $this->params = Yii::$app->params;
