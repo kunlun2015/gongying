@@ -10,6 +10,7 @@ namespace frontend\models;
 use yii;
 use yii\base\Model;
 use yii\db\Expression;
+use yii\helpers\Url;
 
 class Message extends CommonModel
 {
@@ -61,6 +62,22 @@ class Message extends CommonModel
                 'created_at' => $data['time']
             ])->execute();
             $transaction->commit();
+            //模板消息通知
+            $user = new User;
+            $notifyUser = $user->userUInfoByUid($data['to_suid']);
+            $myInfo = $user->userUInfoByUid($data['suid']);
+            $templateMsgData = [
+                'touser' => $notifyUser['openid'],
+                'template_id' => 'KGNI9no-_UVxYgWJ6VQHkfca8Toi2-_SzTbfEHCQP04',
+                'url' => Url::to(['/message']),
+                'data' => [
+                    'username' => [
+                        'value' => $myInfo['username'],
+                        'color' => '#173177'
+                    ]
+                ]
+            ];
+            (new Wx)->sendTemplateMsg($templateMsgData);
             return $rid;
         } catch (\Exception $e) {
             $transaction->rollBack();

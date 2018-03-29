@@ -137,12 +137,12 @@ class Wx extends CommonModel
      * 发送成功返回消息id,失败返回false
      * @return mixed
      */
-    public function sendTemplateMsg()
+    public function sendTemplateMsg($data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='.$this->accessToken();
         $curl = new \linslin\yii2\curl\Curl;
-        $response = $curl->post($url, $data);
-        $response = json_decode($response, true);
+        $response = $curl->setRequestBody(json_encode($data))->post($url);
+        $response = json_decode($response, true);        
         if($response['errcode'] === 0){
             return $response['msgid'];
         }else{

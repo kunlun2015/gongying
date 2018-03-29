@@ -84,6 +84,7 @@ class AppController extends Controller {
                     'last_login_ip' => ip2long($this->request->userIP)
                 ]);
                 $this->session->set('user', $userInfo);
+
             }
         }
     }
