@@ -5,7 +5,7 @@
  * @date    2018-03-16 11:42:48
  * @version $Id$
  */
-    $this->title = '消息列表';
+    $this->title = '我的消息';
     use yii\helpers\Url;
 ?>
 <style>

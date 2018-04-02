@@ -21,32 +21,6 @@ use yii\helpers\Url;
             <i class="fa fa-angle-right"></i>
         </li>
     </ul>
-    <div class="page-toolbar">
-        <div class="btn-group pull-right">
-            <button type="button" class="btn green btn-sm btn-outline dropdown-toggle" data-toggle="dropdown"> Actions
-                <i class="fa fa-angle-down"></i>
-            </button>
-            <ul class="dropdown-menu pull-right" role="menu">
-                <li>
-                    <a href="#">
-                        <i class="icon-bell"></i> Action</a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="icon-shield"></i> Another action</a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="icon-user"></i> Something else here</a>
-                </li>
-                <li class="divider"> </li>
-                <li>
-                    <a href="#">
-                        <i class="icon-bag"></i> Separated link</a>
-                </li>
-            </ul>
-        </div>
-    </div>
 </div>
 <!-- END PAGE BAR -->
 <h3 class="page-title"> banner轮播图
@@ -62,14 +36,6 @@ use yii\helpers\Url;
                 <div class="caption font-dark">
                     <i class="icon-settings font-dark"></i>
                     <span class="caption-subject bold uppercase"> 轮播图管理 </span>
-                </div>
-                <div class="actions">
-                    <div class="btn-group btn-group-devided" data-toggle="buttons">
-                        <label class="btn btn-transparent dark btn-outline btn-circle btn-sm active">
-                            <input type="radio" name="options" class="toggle" id="option1">Actions</label>
-                        <label class="btn btn-transparent dark btn-outline btn-circle btn-sm">
-                            <input type="radio" name="options" class="toggle" id="option2">Settings</label>
-                    </div>
                 </div>
             </div>
             <div class="portlet-body">
@@ -155,5 +121,5 @@ use yii\helpers\Url;
         ');
 ?>
 <?php \backend\assets\AppAsset::addScript($this, 'static/global/scripts/datatable.js'); ?>
-<?php \backend\assets\AppAsset::addScript($this, 'static/global/plugins/datatables/jquery.datatables.min.js'); ?>
+<?php \backend\assets\AppAsset::addScript($this, 'static/global/plugins/datatables/jquery.dataTables.min.js'); ?>
 <?php \backend\assets\AppAsset::addScript($this, 'static/js/banner.js'); ?>

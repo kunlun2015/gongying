@@ -11,7 +11,7 @@ use yii\helpers\Url;
 AppAsset::register($this);
 \backend\assets\AppAsset::addCss($this, 'static/pages/css/login.min.css');
 \backend\assets\AppAsset::addScript($this, 'static/pages/scripts/login2.min.js');
-$this->title = '用户登录';
+$this->title = '全强通电子信息平台-管理员后台';
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -27,8 +27,8 @@ $this->title = '用户登录';
 <!-- BEGIN HEAD -->
     <head>
         <meta charset="<?= Yii::$app->charset ?>" /> 
-        <meta content="" name="author" />
-        <meta content="" name="description" />
+        <meta content="" name="Amos" />
+        <meta content="" name="" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <?= Html::csrfMetaTags() ?>
@@ -41,16 +41,15 @@ $this->title = '用户登录';
         <div class="menu-toggler sidebar-toggler"></div>
         <!-- END SIDEBAR TOGGLER BUTTON -->
         <!-- BEGIN LOGO -->
-        <div class="logo">
-            <a href="index.html">
-                <img src="static/images/logo.png" alt="debugphp" /> </a>
+        <div class="logo" style="width: 400px;background-color: #fff;padding: 15px 0;">
+            <img src="static/images/logo.png" alt="debugphp" />
         </div>
         <!-- END LOGO -->
         <!-- BEGIN LOGIN -->
         <div class="content">
             <!-- BEGIN LOGIN FORM -->
             <form class="login-form" action="" method="post">
-                <h3 class="form-title font-green">用户登录</h3>
+                <h3 class="form-title font-green">管理员登录</h3>
                 <div class="alert alert-danger display-hide return-msg">
                     <button class="close" data-close="alert"></button>
                     <span> 用户名和登录密码不能为空 </span>
@@ -74,7 +73,7 @@ $this->title = '用户登录';
             </form>
             <!-- END LOGIN FORM -->
         </div>
-        <div class="copyright"> 2017 © Kunlun </div>
+        <div class="copyright"> 2018 © 深圳市全强通信息技术有限公司 </div>
         <!--[if lt IE 9]>
         <script src="static/global/plugins/respond.min.js"></script>
         <script src="static/global/plugins/excanvas.min.js"></script> 

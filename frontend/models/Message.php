@@ -70,7 +70,7 @@ class Message extends CommonModel
                 $templateMsgData = [
                     'touser' => $notifyUser['openid'],
                     'template_id' => 'KGNI9no-_UVxYgWJ6VQHkfca8Toi2-_SzTbfEHCQP04',
-                    'url' => Url::to(['/message']),
+                    'url' => Url::to(['/message'], true),
                     'data' => [
                         'username' => [
                             'value' => $myInfo['username'],
@@ -86,11 +86,9 @@ class Message extends CommonModel
             return $rid;
         } catch (\Exception $e) {
             $transaction->rollBack();
-            throw $e;
             return false;
         } catch (\Throwable $e) {
             $transaction->rollBack();
-            throw $e;
             return false;
         }
     }

@@ -28,6 +28,10 @@ class DetailController extends AppController {
         $id = $this->request->get('id');
         $suid = $this->session->get('user')['id'];
         $data['detail'] = $this->published->detail($id);
+        $previewImgUrls = array_map(function($url){
+            return $this->app->params['imgUrl'].$url;
+        }, $data['detail']['pictures']);
+        $data['previewImgUrls'] = $previewImgUrls;
         $data['isCollected'] = $this->published->isCollected($suid, $id);
         $data['singPackage'] = (new Wx)->getSignPackage();
         return $this->render('index', $data);

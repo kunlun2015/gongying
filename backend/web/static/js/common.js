@@ -5,7 +5,7 @@
  * @version $Id$
  */
 
-var siteName = 'kl_系统';
+var siteName = '全强通电子信息平台';
 
 //全局退出
 $('.log-out').click(function(){

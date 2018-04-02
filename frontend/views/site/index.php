@@ -5,7 +5,7 @@
  * @date    2018-02-06 14:24:48
  * @version $Id$
  */
-    $this->title = '首页';
+    $this->title = '全强通电子信息平台';
     use yii\helpers\Url;
     \frontend\assets\AppAsset::addCss($this, 'libs/swiper/css/swiper.min.css');
     \frontend\assets\AppAsset::addScript($this, 'libs/swiper/js/swiper.jquery.min.js');

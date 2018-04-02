@@ -5,7 +5,7 @@
  * @date    2018-03-09 18:12:27
  * @version $Id$
  */
-    $this->title = '详情页';
+    $this->title = $detail['title'].'-详情';
     use yii\helpers\Url;
     \frontend\assets\AppAsset::addScript($this, 'js/detail.js');
     \frontend\assets\AppAsset::addScript($this, 'http://res.wx.qq.com/open/js/jweixin-1.2.0.js');
@@ -78,7 +78,7 @@
             timestamp: <?=$singPackage['timestamp']?>,
             nonceStr: '<?=$singPackage['nonceStr']?>',
             signature: '<?=$singPackage['signature']?>',
-            jsApiList: ['onMenuShareAppMessage']
+            jsApiList: ['onMenuShareAppMessage', '.onMenuShareTimeline', 'previewImage']
         });
         wx.ready(function(){
             wx.onMenuShareAppMessage({
@@ -99,6 +99,14 @@
             success: function () {},
             cancel: function () {}
         });
+        $('.pictures-list img').click(function(){
+            var _this = $(this);
+            wx.previewImage({
+                current: _this.attr('src'),
+                urls: <?php echo json_encode($previewImgUrls); ?>
+            });
+            return false;
+        })        
     })
 <?php $this->endBlock() ?>
 <?php $this->registerJs($this->blocks["pageJs"], \yii\web\View::POS_END); ?>

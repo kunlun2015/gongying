@@ -74,7 +74,7 @@
 
 .img-preview{width: 80px;height: 80px;overflow: hidden;display: block;margin: 10px auto;}
 .img-preview img {width: 100%;}
-.select-avatar-container img{max-width: 100%;}
+.select-avatar-container img{max-width: 100%;max-height: 350px;}
 
 .detail-bottom{position: fixed;bottom: 0;height: 45px;width: 100%;overflow: hidden;background-color: #f7f7f7;}
 .detail-bottom a{font-size: 14px;}
@@ -86,7 +86,7 @@
 .detail-bottom .btn-group-large .btn{float: left;width: 45%;height: 30px;line-height: 30px;text-align: center;margin: 0 2%;background-color: #09c;color: #fff;}
 .detail-bottom .btn-group-large .btn:last-child{background-color: #fff;color: #09c;border: 1px solid #09c;box-sizing: border-box;}
 
-.chat{padding: 10px 15px;overflow: hidden;}
+.chat{padding: 10px 15px;margin-bottom: 45px;overflow: hidden;}
 .chat .avatar{width: 50px;height: 50px;border-radius: 50px;overflow: hidden;float: left;margin: 5px 0;}
 .chat .avatar img{width: 50px;}
 .chat .message{float: left;width: 100%;clear: left;padding: 10px 0;}
