@@ -13,7 +13,7 @@
 ?>
 <header>
     <div class="logo">
-        <img src="<?=Yii::$app->params['staticUrl']?>images/logo.png" alt="">
+        <img src="<?=Yii::$app->params['staticUrl']?>images/logo.png" alt="全强通电子信息平台">
     </div>
     <div class="search">
         <div class="weui-search-bar" id="searchBar">

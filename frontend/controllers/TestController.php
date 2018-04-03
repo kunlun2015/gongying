@@ -32,4 +32,9 @@ class TestController extends Controller {
         var_dump($rst);
     }
 
+    public function actionImg()
+    {
+        echo '<img src="'.Yii::$app->params['staticUrl'].'images/logo.png" alt="全强通电子信息平台">';
+    }
+
 }
