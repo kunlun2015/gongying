@@ -10,6 +10,7 @@ namespace frontend\controllers;
 
 use Yii;
 use yii\web\Controller;
+use yii\helpers\Url;
 use frontend\models\My;
 use frontend\models\User;
 
@@ -86,12 +87,50 @@ class MyController extends AppController {
         return $this->render('selectAvatar');
     }
 
+    //绑定手机号码
+    public function actionBindMobile()
+    {
+        if($this->request->isAjax && $this->request->isPost){
+            $mobile = $this->request->post('mobile');
+            $code = $this->request->post('code');
+            //验证验证码是否正确
+            
+            if($this->my->update($this->user['id'], ['mobile' => $mobile])){
+                $this->user['mobile'] = $mobile;
+                $this->session->set('user', $this->user);
+                $this->jsonExit(0, '已成功绑定手机号码', ['url' => Url::to(['/my/profile'])]);
+            }else{
+                $this->jsonExit(-1, '手机号码解绑失败，请稍后重试');
+            }
+        }
+        $mobile = $this->user['mobile'];
+        $data['backUrl'] = $this->request->get('backUrl');
+        return $mobile ? $this->app->runAction('/my/unbind-mobile') : $this->render('bindMobile', $data);
+    }
+
+    public function actionUnbindMobile()
+    {
+        if($this->request->isAjax && $this->request->isPost){
+            $mobile = $this->request->post('mobile');
+            $code = $this->request->post('code');
+            //验证验证码是否正确
+            if($this->my->update($this->user['id'], ['mobile' => ''])){
+                $this->user['mobile'] = '';
+                $this->session->set('user', $this->user);
+                $this->jsonExit(0, '已解绑手机号码，请重新绑定手机号码', ['url' => Url::to(['/my/bind-mobile'])]);
+            }else{
+                $this->jsonExit(-1, '手机号码解绑失败，请稍后重试');
+            }
+        }
+        $mobile = $this->user['mobile'];
+        return $this->render('unBindMobile', ['mobile' => $mobile]);
+    }
+
     public function actionEditProfile()
     {
         if($this->request->isAjax && $this->request->isPost){
             $data = [
                 'username' => $this->request->post('username'),
-                'mobile'   => $this->request->post('mobile'),
                 'company'  => $this->request->post('company'),
                 'position' => $this->request->post('position')
             ];

@@ -106,3 +106,12 @@
 .message-spot{display: inline-block;width: 10px;height: 10px;border-radius: 10px;background-color: #f43530;position: absolute;margin: 5px 0 0 6px;}
 
 .weui-form-preview__hd .weui-form-preview__value{font-size: 14px !important;}
+
+.bind-mobile-form .save-btn{width: 90%;margin-top: 20px;}
+.weui-vcode-btn:disabled{color: #ccc;}
+.save-btn.disabled{background-color: #ccc;}
+.save-btn.disabled:active{background-color: #ccc !important;}
+
+.get-mobile-modal .tips{font-size: 12px;color: #ccc;}
+.more-message-btn{display: block;font-size: 14px;text-align: center;text-decoration: underline;}
+.more-message-btn.loading:after{content: '';display: inline-block;}

@@ -6,7 +6,7 @@
  * @version $Id$
  */
 
-    $this->title = $errMsg.'-debugphp温馨提示';
+    $this->title = $errMsg.'-全强通电子信息平台';
     use yii\helpers\Url;
     \frontend\assets\AppAsset::addCss($this, 'css/style.css');
 ?>

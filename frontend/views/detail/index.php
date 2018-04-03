@@ -66,7 +66,7 @@
         </a>
     </div>
     <div class="btn-group-large">
-        <a href="javascript:;" class="btn">电话联系</a>
+        <a href="javascript:;" class="btn contact">电话联系</a>
         <a href="<?=Url::to(['/message/detail', 'toId' => $detail['suid']])?>" class="btn">发消息</a>
     </div>
 </div>
@@ -106,7 +106,21 @@
                 urls: <?php echo json_encode($previewImgUrls); ?>
             });
             return false;
-        })        
+        })
+        $('.btn-share').click(function(){
+            $.toast("请点击右上角的+号，使用微信分享", "text");
+            return false;
+        })
+        $('.contact').click(function(){
+            $.modal({
+                title: "获取发布者电话号码",
+                text: '<div class="get-mobile-modal"><p class="tips">获取发布者的电话号码需验证自己的电话号码。</p></div>',
+                buttons: [
+                    { text: "取消", className: "default", onClick: function(){ console.log(1)} },
+                    { text: "获取电话号码", onClick: function(){ console.log(2)} }
+                ]
+            });
+        })
     })
 <?php $this->endBlock() ?>
 <?php $this->registerJs($this->blocks["pageJs"], \yii\web\View::POS_END); ?>

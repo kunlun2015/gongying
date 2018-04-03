@@ -139,14 +139,19 @@ class Message extends CommonModel
     public function messageDetail($rid, $page, $pageSize, &$totalPage)
     {
         $offset = ($page - 1)*$pageSize;
-        $list = $this->db->createCommand('select t1.id, rid, suid, username, avatar, message_text, t1.status, t1.created_at from {{%message_text}} as t1 left join {{%site_users}} as t2 on t1.suid = t2.id where rid = :rid order by t1.id asc limit :offset, :pageSize', [
+        $list = $this->db->createCommand('select t1.id, rid, suid, username, avatar, message_text, t1.status, t1.created_at from {{%message_text}} as t1 left join {{%site_users}} as t2 on t1.suid = t2.id where rid = :rid order by t1.id desc limit :offset, :pageSize', [
             'rid' => $rid,
             'offset' => $offset,
             'pageSize' => $pageSize
         ])->queryAll();
+        $message = [];
+        $length = count($list);
+        foreach ($list as $k => $v) {
+            $message[$k] = $list[$length - $k -1];
+        }
         $sqlTotal = 'select count(*) from {{%message_text}} where rid = '.$rid;
         $totalPage = $this->getTotalPage($sqlTotal, $pageSize);
-        return $list;
+        return $message;
     }
 
     /**

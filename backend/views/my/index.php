@@ -23,32 +23,6 @@ use yii\helpers\Url;
             <span>我的账户</span>
         </li>
     </ul>
-    <div class="page-toolbar">
-        <div class="btn-group pull-right">
-            <button type="button" class="btn green btn-sm btn-outline dropdown-toggle" data-toggle="dropdown"> Actions
-                <i class="fa fa-angle-down"></i>
-            </button>
-            <ul class="dropdown-menu pull-right" role="menu">
-                <li>
-                    <a href="#">
-                        <i class="icon-bell"></i> Action</a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="icon-shield"></i> Another action</a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="icon-user"></i> Something else here</a>
-                </li>
-                <li class="divider"> </li>
-                <li>
-                    <a href="#">
-                        <i class="icon-bag"></i> Separated link</a>
-                </li>
-            </ul>
-        </div>
-    </div>
 </div>
 <!-- END PAGE BAR -->
 <h3 class="page-title"> 个人中心
@@ -66,44 +40,13 @@ use yii\helpers\Url;
                 </div>
                 <!-- END SIDEBAR USERPIC -->
                 <!-- SIDEBAR USER TITLE -->
-                <div class="profile-usertitle">
+                <div class="profile-usertitle" style="padding-bottom: 15px;">
                     <div class="profile-usertitle-name"> <?=$myInfo['username']?> </div>
                     <div class="profile-usertitle-job"> <?=$myInfo['realname']?> </div>
                 </div>
-                <!-- END SIDEBAR USER TITLE -->
-                <!-- SIDEBAR MENU -->
-                <div class="profile-usermenu">
-                    <ul class="nav">
-                        <li class="active">
-                            <a href="page_user_profile_1_account.html">
-                                <i class="icon-settings"></i> 账户设置 </a>
-                        </li>
-                        <li>
-                            <a href="page_user_profile_1_help.html">
-                                <i class="icon-info"></i> 帮助反馈 </a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- END MENU -->
             </div>
             <!-- END PORTLET MAIN -->
-            <div class="portlet light ">
-                <!-- STAT -->
-                <div class="row list-separated profile-stat">
-                    <div class="col-md-4 col-sm-4 col-xs-6">
-                        <div class="uppercase profile-stat-title"> 100 </div>
-                        <div class="uppercase profile-stat-text"> 项目1 </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-6">
-                        <div class="uppercase profile-stat-title"> 51 </div>
-                        <div class="uppercase profile-stat-text"> 项目2 </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-6">
-                        <div class="uppercase profile-stat-title"> 61 </div>
-                        <div class="uppercase profile-stat-text"> 项目3 </div>
-                    </div>
-                </div>
-                <!-- END STAT -->
+            <div class="portlet light ">                
                 <div>
                     <h4 class="profile-desc-title">登录信息</h4>
                     <span class="profile-desc-text"> 记录上次账户登录信息 </span>

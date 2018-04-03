@@ -32,8 +32,20 @@ class PublishController extends AppController {
             return $this->app->runAction('publish/type');
         }
         $data['type'] = $type === 'purchase' ? 1 : 2;
+
+        //发布产品或者求购需要绑定手机号码
+        if(!$this->user['mobile']){
+            return $this->tipsPage([
+                'title' => '', 
+                'msg' => '发布产品或者求购需要绑定手机号码', 
+                'icon' => 'weui-icon-info',
+                'redirect' => true,
+                'autoRedirect' => true,
+                'redirectUrl' => Url::to(['/my/bind-mobile', 'backUrl' => Url::to(['/publish', 'type' => 'supply'])])
+            ]);
+        }
         //如果发布产品需要完善个人信息
-        if($data['type'] == 2 && (!$this->user['mobile'] || !$this->user['company'])){
+        if($data['type'] == 2 && !$this->user['company']){
             return $this->tipsPage([
                 'title' => '', 
                 'msg' => '发布产品需要完善个人信息,正在跳转完善个人信息，请稍后……', 

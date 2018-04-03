@@ -34,6 +34,16 @@ class MessageController extends AppController {
         return $this->render('index', $data);
     }
 
+    public function actionList()
+    {
+        $message = new Message;
+        $page = (int)$this->request->get('page') ? (int)$this->request->get('page') : 1;
+        $rid = (int)$this->request->get('rid');
+        $pageSize = 10;
+        $list = $message->messageDetail($rid, $page, $pageSize, $totalPage);
+        $this->jsonExit(0, '数据获取成功', $list);
+    }
+
     
     public function actionDetail()
     {   
@@ -59,7 +69,7 @@ class MessageController extends AppController {
         $pageSize = 10;
         $data['message'] = [];
         if($data['rid']){
-            $data['message'] = $message->messageDetail($data['rid'], $page, $pageSize, $totalPage);
+            $data['message'] = $message->messageDetail($data['rid'], $page, $pageSize, $data['totalPage']);
             $message->markMessageReaded($data['rid'], $this->user['id']);
             //删除模板消息发送标志，如果已查看则可发送模板消息通知否则在特定的时间内只发送一次
             $this->app->cache->get($data['rid'].'-'.$this->user['id']) && $this->app->cache->delete($data['rid'].'-'.$this->user['id']);

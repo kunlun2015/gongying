@@ -5,7 +5,7 @@
  * @date    2017-12-13 12:00:51
  * @version $Id$
  */
-    $this->title = $title.'-debugphp温馨提示';
+    $this->title = $title.'-全强通电子信息平台';
     use yii\helpers\Url;
     \frontend\assets\AppAsset::addCss($this, 'css/style.css');
 ?>

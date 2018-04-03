@@ -18,12 +18,6 @@
         </div>
     </div>
     <div class="weui-cell">
-        <div class="weui-cell__hd"><label class="weui-label">手机号码</label></div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" name="mobile" value="<?=$user['mobile']?>" type="text" placeholder="请输入您的手机号码">
-        </div>
-    </div>
-    <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">所在公司</label></div>
         <div class="weui-cell__bd">
             <input class="weui-input" name="company" value="<?=$user['company']?>" type="text" placeholder="所在公司名称">
@@ -46,12 +40,6 @@
             if(!$('input[name="username"]').val()){
                 $.alert("姓名不能为空", function(){
                     $('input[name="username"]').focus();
-                });
-                return false;
-            }
-            if(!tools.validate.mobile($('input[name="mobile"]').val())){
-                $.alert("手机号码格式不正确", function(){
-                    $('input[name="mobile"]').focus();
                 });
                 return false;
             }
