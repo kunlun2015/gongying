@@ -39,6 +39,7 @@
 </div>
 <?php $this->beginBlock("pageJs") ?>
     $(document).ready(function(){
+        $('.message').last()[0].scrollIntoView();
         <?php if($rid){ ?>
         $('.more-message-btn').click(function(){
             var _this = $(this);

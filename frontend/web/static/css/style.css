@@ -113,5 +113,5 @@
 .save-btn.disabled:active{background-color: #ccc !important;}
 
 .get-mobile-modal .tips{font-size: 12px;color: #ccc;}
-.more-message-btn{display: block;font-size: 14px;text-align: center;text-decoration: underline;}
+.more-message-btn{display: block;font-size: 14px;text-align: center;color: #069DF9;}
 .more-message-btn.loading:after{content: '';display: inline-block;}

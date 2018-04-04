@@ -72,7 +72,8 @@
             if(!$("input[name=code]").val()){
                 $.alert("验证码不能为空", function(){
                     $('input[name="code"]').focus();
-                });   
+                });
+                return false;
             }
             tools.ajax({
                 url: '<?=Url::to(['/my/unbind-mobile'])?>',
