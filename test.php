@@ -4,9 +4,5 @@
  * @param array $arr
  * @return array 
  */
-$arr = [
-    1=> ['name' => 'amos'],
-    2=> ['name' => 'kunlun']
-];
-
-print_r(array_values($arr));
+ini_set('display_errors', 1);
+error_reporting(E_ALL);

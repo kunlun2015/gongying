@@ -39,21 +39,17 @@
                 aspectRatio: 1 / 1,
                 preview: '.img-preview',
                 cropBoxResizable: false,
-                crop: function(event) {
-                    console.log(event.detail.x);
-                    console.log(event.detail.y);
-                    console.log(event.detail.width);
-                    console.log(event.detail.height);
-                    console.log(event.detail.rotate);
-                    console.log(event.detail.scaleX);
-                    console.log(event.detail.scaleY);
-              }
+                crop: function(event) {}
             });
             return false;
         })
 
         $('.save-avatar').click(function(){
-            var imgData=$image.cropper('getCroppedCanvas', {width: 120, heidht: 120})
+            var imgData = $image.cropper('getCroppedCanvas', {width: 120, heidht: 120})
+            if(imgData === null){
+                $.toast('请选择头像再保存', 'cancel');
+                return false;
+            }
             var dataurl = imgData.toDataURL('image/png');
             tools.ajax({
                 url: '/my/save-avatar',

@@ -22,6 +22,11 @@ class AdminController extends CommonController{
     //菜单权限判断
     public function beforeAction($action){
         //登录控制
+       /* $this->session->set('user', [
+            'id' => 1,
+            'avatar' => '',
+            'username' => 'df'
+        ]);*/
         if(!$this->session->get('user')){
             return $this->redirect(Url::to(['/login'], true), 301);
         }

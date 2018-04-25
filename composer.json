@@ -21,7 +21,8 @@
         "linslin/yii2-curl": "*",
         "kosinix/grafika": "dev-master",
         "mobiledetect/mobiledetectlib": "^2.8",
-        "yiisoft/yii2-redis": "^2.0"
+        "yiisoft/yii2-redis": "^2.0",
+        "qcloudsms/qcloudsms_php": "0.1.*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

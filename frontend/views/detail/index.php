@@ -58,9 +58,9 @@
 <input type="hidden" id="csrf" name="<?= \Yii::$app->request->csrfParam; ?>" value="<?= \Yii::$app->request->getCsrfToken();?>">
 <div class="detail-bottom">
     <div class="btn-group-small">
-        <a href="javascript:;" class="btn btn-share">
+        <!-- <a href="javascript:;" class="btn btn-share">
             <i class="fa fa-share-alt"></i>分享
-        </a>
+        </a> -->
         <a href="javascript:;" class="btn btn-collect">
             <i class="fa <?php if($isCollected){ ?>fa-star<?php }else{ ?>fa-star-o<?php } ?>"></i>收藏
         </a>

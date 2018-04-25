@@ -33,6 +33,7 @@ class AppController extends Controller {
     public function actionError()
     {
         $exception = Yii::$app->errorHandler->exception;
+        var_dump($exception);
         if($exception && isset($exception->statusCode) && $exception->statusCode === 404){
             return $this->tipsPage(['errMsg' => '页面找不到了'], '404');
         }else{
@@ -53,14 +54,14 @@ class AppController extends Controller {
     //未登录则微信授权登陆并存储session
     private function loginControl()
     {
-        /*$this->session->set('user', [
+        $this->session->set('user', [
             'id' => 1,
             'openid' => 'sdfgfg',
             'username' => 'Amos',
             'avatar' => 'avatar/2018/03/3J9na83TIzrE20180316101442.jpeg',
-            'mobile' => 'erftg',
+            'mobile' => '18656706251',
             'company' => 'sdrg'
-        ]);*/
+        ]);
         if(!$this->session->get('user')){
             $user = new User;
             $wxUserInfo = (new Wx)->userInfo();

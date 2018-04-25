@@ -39,6 +39,9 @@ var tools = {
             url: params.url,
             type: params.type,
             dataType: params.dataType,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
             data: params.data,
             beforeSend: params.beforeSend ? params.beforeSend : function(){},
             success: params.success,

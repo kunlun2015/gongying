@@ -44,7 +44,7 @@ class MyController extends AdminController{
                 $password     = $this->request->post('password');
                 $password_old = $this->request->post('password_old');
                 //校验原密码是否正确
-                $checkPassword= $this->my->checkOldPassword($password_old);
+                $checkPassword= $this->my->checkOldPassword($password_old);                
                 if(!$checkPassword){
                     $this->jsonExit(-1, '原密码输入不正确！');
                 }

@@ -32,16 +32,7 @@ use yii\helpers\Url;
                 </div>
             </div>
             <div class="portlet-body">
-                <div class="table-toolbar">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="btn-group fr">
-                                <a href="<?=Url::to(['tags/add'])?>" class="btn sbold green"> 添加
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="table-toolbar">                    
                 </div>
                 <table class="table table-striped table-bordered table-hover table-checkable order-column" id="list-table">
                     <thead>

@@ -16,14 +16,14 @@ class My extends CommonModel{
     //修改登陆密码
     public function editPassword($newPassword){
         $data['encrypt'] = $this->randString(12);
-        $data['password'] = md5(md5($newPassword).$data['encrypt']);
-        return $this->db->createCommand()->update('{{%users}}', $data, array('id' => $this->uid))->execute();
+        $data['password'] = $this->genPassword($newPassword, $data['encrypt']);
+        return $this->db->createCommand()->update('{{%login_psd}}', $data, array('uid' => $this->uid))->execute();
     }
 
     //原密码信息
     public function checkOldPassword($oldPassword){
-        $oldPasswordInfo = $this->db->createCommand('select password, encrypt from {{%root_user}} where id = :uid', array('uid' => $this->uid))->queryOne();
-        return ($oldPasswordInfo['password'] === md5(md5($oldPassword).$oldPasswordInfo['encrypt'])) ? true : false;
+        $oldPasswordInfo = $this->db->createCommand('select password, encrypt from {{%login_psd}} where uid = :uid', array('uid' => $this->uid))->queryOne();
+        return $this->verifyPassword($oldPassword, $oldPasswordInfo['password'], $oldPasswordInfo['encrypt']);
     }
 
     //个人信息

@@ -117,6 +117,7 @@ use yii\helpers\Url;
                                 <input type="text" name="picture" id="picture" class="form-control input-inline input-xlarge" readonly="readonly" placeholder="图片路径(上传后自动填充)">
                                 <input type="file" name="file" class="none" id="banner-file-input" accept="image/png,image/jpeg,image/jpg" capture="camera">
                                 <button type="button" class="btn blue select-banner-img">选择图片</button>
+                                <span>图片尺寸：750*350</span>
                             </div>
                         </div>
                         <div class="form-group">

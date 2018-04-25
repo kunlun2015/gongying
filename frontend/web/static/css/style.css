@@ -48,7 +48,8 @@
 .type-select li p{line-height: 25px;}
 .type-select li a{display: block;width: 90%;line-height: 40px;text-align: center;margin: 10px auto 0 auto;background-color: #0099CC;color: #fff;}
 
-.publish-form .save-btn, .publish-form .update-btn{margin: 30px 0;}
+.publish-form .save-btn, .publish-form .update-btn{margin: 30px auto;}
+.publish-form .save-btn{width: 90%;}
 .message-list{margin: 0 0 60px 0;}
 
 .avatar{width: 80px;height: 80px;margin: 20px auto;border-radius: 80px;overflow: hidden;}
@@ -78,11 +79,11 @@
 
 .detail-bottom{position: fixed;bottom: 0;height: 45px;width: 100%;overflow: hidden;background-color: #f7f7f7;}
 .detail-bottom a{font-size: 14px;}
-.detail-bottom .btn-group-small{width: 35%;float: left;}
-.detail-bottom .btn-group-small .btn{float: left;width: 45%;text-align: center;padding: 0 2%;}
+.detail-bottom .btn-group-small{width: 20%;float: left;}
+.detail-bottom .btn-group-small .btn{float: left;width: 100%;text-align: center;padding: 0 2%;}
 .detail-bottom .btn-group-small a{color: #09c;}
 .detail-bottom .btn-group-small a i{display: block;margin-top: 9px;}
-.detail-bottom .btn-group-large{width: 65%;float: left;margin: 8px 0;}
+.detail-bottom .btn-group-large{width: 80%;float: left;margin: 8px 0;}
 .detail-bottom .btn-group-large .btn{float: left;width: 45%;height: 30px;line-height: 30px;text-align: center;margin: 0 2%;background-color: #09c;color: #fff;}
 .detail-bottom .btn-group-large .btn:last-child{background-color: #fff;color: #09c;border: 1px solid #09c;box-sizing: border-box;}
 
