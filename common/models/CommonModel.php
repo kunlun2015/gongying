@@ -87,7 +87,7 @@ class CommonModel extends Model {
      * @param string $errMsg
      * @param array $data json参数
      */
-    protected function jsonExit($errCode, $errMsg, $data)
+    protected function jsonExit($errCode, $errMsg, $data=[])
     {
         $return = ['errCode' => $errCode, 'errMsg' => $errMsg, 'data' => $data];
         exit(json_encode($return));
