@@ -13,7 +13,7 @@
         <img src="<?=Yii::$app->params['staticUrl']?>images/logo.png" alt="">
     </div>
     <div class="search">
-        <div class="weui-search-bar" id="searchBar">
+        <div class="weui-search-bar<?php if($keywords){ ?> weui-search-bar_focusing<?php } ?>" id="searchBar">
             <form class="weui-search-bar__form">
                 <div class="weui-search-bar__box">
                     <i class="weui-icon-search"></i>

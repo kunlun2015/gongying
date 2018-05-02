@@ -180,4 +180,10 @@ class Published extends CommonModel
     {
         return $this->db->createCommand()->delete('{{%collection}}', ['suid' => $suid, 'pid' => $pid])->execute();
     }
+
+    public function getMobileByUid($uid)
+    {
+        $mobile = $this->db->createCommand('select mobile from {{%site_users}} where id = :suid limit 1', ['suid' => $uid])->queryColumn();
+        return $mobile ? $mobile[0] : false;
+    }
 }

@@ -13,6 +13,7 @@ use yii\web\Controller;
 use yii\helpers\Url;
 use frontend\models\My;
 use frontend\models\User;
+use common\models\Sms;
 
 class MyController extends AppController {
 
@@ -94,7 +95,7 @@ class MyController extends AppController {
             $mobile = $this->request->post('mobile');
             $code = $this->request->post('code');
             //验证验证码是否正确
-            
+            (new Sms)->checkCode('common', $mobile, $code);
             if($this->my->update($this->user['id'], ['mobile' => $mobile])){
                 $this->user['mobile'] = $mobile;
                 $this->session->set('user', $this->user);
@@ -114,6 +115,7 @@ class MyController extends AppController {
             $mobile = $this->request->post('mobile');
             $code = $this->request->post('code');
             //验证验证码是否正确
+            (new Sms)->checkCode('common', $mobile, $code);
             if($this->my->update($this->user['id'], ['mobile' => ''])){
                 $this->user['mobile'] = '';
                 $this->session->set('user', $this->user);

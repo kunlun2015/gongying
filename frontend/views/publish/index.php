@@ -117,4 +117,5 @@
 </div>
 <script>
     var classify = <?=json_encode($classify)?>;
+    var type = <?=$type?>;
 </script>

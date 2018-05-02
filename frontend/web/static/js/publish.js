@@ -198,30 +198,33 @@ $(document).ready(function(){
             });
             return false;
         }
-        if(!$("input[name=num]").val()){
-            $.alert("数量不能为空", function(){
-                $("input[name=num]").focus()
-            });
-            return false;
+        if(type === 1){
+            if(!$("input[name=num]").val()){
+                $.alert("数量不能为空", function(){
+                    $("input[name=num]").focus()
+                });
+                return false;
+            }
+            if(!$("input[name=budget]").val()){
+                $.alert("预算金额不能为空", function(){
+                    $("input[name=budget]").focus()
+                });
+                return false;
+            }
+            if(!$("input[name=delivery_cycle]").val()){
+                $.alert("交付周期不能为空", function(){
+                    $("input[name=delivery_cycle]").focus()
+                });
+                return false;
+            }
         }
+        
         if(!$("input[name=fid]").val()){
             $.alert("请选择所属分类", function(){
                 $("input[name=classify-1]").select('open');
             });
             return false;
-        }
-        if(!$("input[name=budget]").val()){
-            $.alert("预算金额不能为空", function(){
-                $("input[name=budget]").focus()
-            });
-            return false;
-        }
-        if(!$("input[name=delivery_cycle]").val()){
-            $.alert("交付周期不能为空", function(){
-                $("input[name=delivery_cycle]").focus()
-            });
-            return false;
-        }
+        }        
         if($('#uploaderFiles').find('li').length === 0){
             $.alert("请至少上传一张图片", function(){
             });

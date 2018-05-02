@@ -112,14 +112,40 @@
             return false;
         })
         $('.contact').click(function(){
-            $.modal({
-                title: "获取发布者电话号码",
-                text: '<div class="get-mobile-modal"><p class="tips">获取发布者的电话号码需验证自己的电话号码。</p></div>',
-                buttons: [
-                    { text: "取消", className: "default", onClick: function(){ console.log(1)} },
-                    { text: "获取电话号码", onClick: function(){ console.log(2)} }
-                ]
-            });
+            if(<?=$isBindMObile?>){
+                tools.ajax({
+                    url: '<?=Url::to(['/detail/get-mobile'])?>',
+                    type: 'get',
+                    dataType: 'json',
+                    data: {uid: <?=$detail['suid']?>},
+                    success: function(res)
+                    {
+                        if(res.code == 0){
+                            $.modal({
+                                title: '<a href="tel:'+res.data.mobile+'">'+res.data.mobile+'</a>',
+                                text: '<div class="get-mobile-modal"><p class="tips">点击手机号码即可拨打</p></div>',
+                                buttons: [
+                                    { text: "我知道了", className: "default"}
+                                ]
+                            });
+                        }else{
+                            $.toast(res.msg, 'cancel');
+                        }
+                    }
+                })                
+            }else{
+                $.modal({
+                    title: "您还没有绑定手机号码",
+                    text: '<div class="get-mobile-modal"><p class="tips">获取发布者的电话号码需绑定自己的电话号码。</p></div>',
+                    buttons: [
+                        { text: "取消", className: "default" },
+                        { text: "去绑定", onClick: function(){
+                                window.location.href = '<?=Url::to(['/my/bind-mobile'])?>';
+                            } 
+                        }
+                    ]
+                });
+            }            
         })
     })
 <?php $this->endBlock() ?>

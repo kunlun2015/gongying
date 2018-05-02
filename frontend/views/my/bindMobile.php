@@ -43,19 +43,37 @@
                 });
                 return false;
             }
-            _this.attr('disabled', true);
-            var count = 30;
-            var timer = null;
-            timer = setInterval(function () {
-                    if (count > 0) {
-                        count = count - 1;
-                        $('.weui-vcode-btn span').text('('+count+')');
-                    }else {
-                       $('.weui-vcode-btn span').text('');
-                       _this.attr('disabled', false);
-                       clearInterval(timer);
-                   }
-                }, 1000);
+            tools.ajax({
+                url : '<?=Url::to(['/send-sms/bind-mobile'])?>',
+                type: 'post',
+                dataType: 'json',
+                data: {mobile: $('input[name="mobile"]').val()},
+                beforeSend: function(){
+                    _this.attr('disabled', true);
+                },
+                success: function(res){
+                    if(res.code == 0){
+                        var count = 30;
+                        var timer = null;
+                        timer = setInterval(function () {
+                                if (count > 0) {
+                                    count = count - 1;
+                                    $('.weui-vcode-btn span').text('('+count+')');
+                                }else {
+                                   $('.weui-vcode-btn span').text('');
+                                   _this.attr('disabled', false);
+                                   clearInterval(timer);
+                               }
+                            }, 1000);
+                    }else{
+                        $.toast(res.msg, 'cancel');
+                    }
+                },
+                error: function(){
+                    _this.attr('disabled', false);
+                }
+                
+            })
             return false;
         })
 

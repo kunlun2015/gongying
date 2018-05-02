@@ -89,7 +89,7 @@ class CommonModel extends Model {
      */
     protected function jsonExit($errCode, $errMsg, $data=[])
     {
-        $return = ['errCode' => $errCode, 'errMsg' => $errMsg, 'data' => $data];
+        $return = ['code' => $errCode, 'msg' => $errMsg, 'data' => $data];
         exit(json_encode($return));
     }
 

@@ -9,6 +9,8 @@ return [
     'wx' => [
         'appId' => 'wx1bfc812312887fd2',
         'appSecret' => 'eccb65fc93ef74d2109a005ddceaab48'
+        /*'appId' => 'wxbd3fc45c41bce23d',
+        'appSecret' => '8c2996c622e82b63fd38057387a76e48'*/
     ],
     'sms' => [
         'appid' => 1400087307,

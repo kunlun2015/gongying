@@ -27,6 +27,7 @@ class DetailController extends AppController {
     {      
         $id = $this->request->get('id');
         $suid = $this->session->get('user')['id'];
+        $data['isBindMObile'] = $this->session->get('user')['mobile'] ? 1 : 0;
         $data['detail'] = $this->published->detail($id);
         $previewImgUrls = array_map(function($url){
             return $this->app->params['imgUrl'].$url;
@@ -57,6 +58,17 @@ class DetailController extends AppController {
             }else{
                 $this->jsonExit(-1, '取消收藏失败，请稍后重试');
             }
+        }
+    }
+
+    public function actionGetMobile()
+    {
+        $uid = $this->request->get('uid');
+        $mobile = $this->published->getMobileByUid($uid);
+        if($mobile){
+            $this->jsonExit(0, '手机号码获取成功', ['mobile' => $mobile]);
+        }else{
+            $this->jsonExit(-1, '手机号码获取失败');
         }
     }
 }
